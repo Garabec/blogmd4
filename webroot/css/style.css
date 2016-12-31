@@ -1,0 +1,63 @@
+body {
+        padding-top: 50px;
+    
+      }
+      
+.starter-template {
+    
+    padding: 40px 15px;
+    
+}
+
+form {
+    
+    
+    width: 400px;
+    
+    max-width: 400px;
+    
+}
+
+.textarea {
+    
+    padding-top: 5px;
+}
+
+.alert{
+    
+    padding-top: 15px;
+      width: 400px;
+    
+    max-width: 400px; 
+    
+}
+
+
+.row1 {  background-color: #737373;  padding: 10px 10px 10px 10px }
+
+.foto{ margin: 20px 20px 20px 20px;
+       padding: 10px 10px 10px 10px;
+       float:left;
+       height: 300px;
+       width: 300px; 
+       outline: 2px solid #000; /* Чёрная рамка */
+        border: 3px solid #fff; /* Белая рамка */
+       text-align: center;
+}
+
+.foto img{ display:block; margin:0 auto;
+           height: 200px;
+           width: 200px;  
+    
+    
+    
+}
+
+.normal { padding: 10px 10px 10px 10px;        }
+
+.text {padding: 10px 10px 10px 10px;
+       margin: 10px 10px 10px 10px;
+       text-align: inherit;
+    
+    
+}

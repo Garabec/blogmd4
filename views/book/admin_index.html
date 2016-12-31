@@ -1,0 +1,32 @@
+
+
+<table class="table table-striped ">
+    
+<tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>IsActive</th>
+        <th>Style</th>
+</tr>
+
+<?php foreach ($data as $book) : ?>
+
+
+
+<tr>
+<td><?=($book->getId())?> </td> 
+<td><?=($book->getTitle())?> </td>
+<td><?=($book->getDescription())?> </td>
+<td><?=($book->getPrice())?> </td>
+<td><?=($book->getIsActive())?> </td>
+<td><?=($book->getStyle()->getName())?> </td>
+
+
+
+</tr> 
+
+<?php endforeach; ?>
+
+</table>

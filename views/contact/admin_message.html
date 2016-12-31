@@ -1,0 +1,27 @@
+<table class="table table-striped ">
+    
+<tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Date</th>
+</tr>
+
+<?php foreach ($data as $message) : ?>
+
+
+
+<tr>
+<td><?=($message->getId())?> </td> 
+<td><?=($message->getName())?> </td>
+<td><?=($message->getEmail())?> </td>
+<td><?=($message->getMessage())?> </td>
+<td><?=($message->getDate())?> </td>
+
+
+</tr> 
+
+<?php endforeach; ?>
+
+</table>
