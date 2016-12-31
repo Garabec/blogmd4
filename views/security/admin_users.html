@@ -4,6 +4,7 @@
         <th>Id</th>
         <th>Email</th>
         <th>Password</th>
+        <th>Action</th>
 </tr>
 
 <?php foreach ($data as $user) : ?>
@@ -14,6 +15,15 @@
 <td><?=($user->getId())?> </td> 
 <td><?=($user->getEmail())?> </td>
 <td><?=($user->getPassword())?> </td>
+
+<td>  
+
+<a href="#"><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
+
+<a href="#"><button type="button" class="btn btn-danger">Delete</button>  </a>
+
+
+</td>
 
 </tr> 
 

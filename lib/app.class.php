@@ -53,6 +53,8 @@ class App {
          $view_path=$controller_object->$action();
          
          
+         
+         
          $view_object=new View($controller_object->getData(),$view_path);
          
          

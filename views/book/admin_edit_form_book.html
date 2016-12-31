@@ -1,0 +1,51 @@
+<h1>Book</h1>
+
+
+<form method="post" action="/admin/book/edit_book">
+  
+    <div class="form-group">
+        <label for="id">Id</label>
+      <input type="text" id="id"  name="id" class="form-control" value="<?=$data['book']->getId()?>"  >
+    </div>
+    
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" class="form-control"    value="<?=$data['book']->getTitle()?>" >
+        
+    </div> 
+    
+   <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" class="form-control" value="<?=$data['book']->getDescription()?>" >
+        
+    </div> 
+    
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="text" id="price" name="price" class="form-control" value="<?=$data['book']->getPrice()?>" >
+        
+    </div> 
+    
+    <div class="form-group">
+      <label for="is_active">IsActive</label>
+      <input type="text" id="is_active" name="is_active" class="form-control" value="<?=$data['book']->getIsActive()?>" >
+      
+     </div> 
+    
+    
+    
+    
+    <div class="form-group">
+   <label for="style">Style</label>   
+    <select  id="style" name="style" >
+    <option selected > <?=$data['book']->getStyle()->getName()?> </option> 
+    <?php foreach ($data['style'] as $style) : ?>  
+    <option><?=$style->getName()?></option>
+	  <?php endforeach; ?>
+    </select>
+    
+    </div> 
+    
+    <button type="submit" class="btn-lg btn-block btn-primary">Edit</button>
+  
+</form> 

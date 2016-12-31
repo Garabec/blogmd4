@@ -37,6 +37,10 @@ class View {
     
     public function __construct($data=array(),$path=null){
         
+       
+        
+        
+        
        if(!$path){
            
           $path= self::getDefaultPath();
@@ -46,6 +50,8 @@ class View {
         
       $this->data=$data;
       $this->path=$path;
+      
+      
         
       }
     

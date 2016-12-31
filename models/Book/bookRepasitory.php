@@ -92,5 +92,75 @@ class BookRepasitory extends Model {
         
     }
     
+   
+public function save(Book $book) {
+ 
+ 
+ 
+ $style=$book->getStyle();
+ 
+ 
+ 
+ 
+ 
+ $sql=" select id from `style` where name='$style' ";
+ 
+ $result=$this->db->getConnectionDB()->query($sql);
+ 
+ $style=$result->fetch(PDO::FETCH_ASSOC);
+        
+       
+        
+        $data=array(
+              
+              'title'=>$book->getTitle(),
+              'description'=>$book->getDescription(),
+              'price'=>$book->getPrice(),
+              'is_active'=>$book->getIsActive(),
+              'style_id'=>$style['id']
+             );
+        
+        
+      
+        
+        
+             
+               
+       $id=(int)$book->getId();         
+               
+ 
+ $sql="update `book` set `title`=:title,`price`=:price,`description`=:description,`is_active`=:is_active,`style_id`=:style_id where id='$id'" ;
+ 
+ 
+ $result=$this->db->getConnectionDB()->prepare($sql);
+     
+     
+     
+     return $result->execute($data);
+ 
+ 
+ 
+ 
+}  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     
 }

@@ -49,7 +49,24 @@ elseif(file_exists($path_controller)){
     
 }
 
+
+function autoload_class_form($classname){
+     
+ $path_model_form=MODEL_DIR.DS.ucfirst(str_replace('FormEdit','',$classname)).DS.strtolower(str_replace('FormEdit','',$classname)).'FormEdit.php';   
+     
+  if (file_exists($path_model_form)) {
+    
+     return   require_once $path_model_form;
+     
+}         
+     
+     
+}
+
+
+
 spl_autoload_register('autoload_class');
+spl_autoload_register('autoload_class_form');
 
 
 require_once CONFIG_DIR.DS.'config.php';

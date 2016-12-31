@@ -10,7 +10,7 @@ class SecurityController extends Controller {
       parent::__construct($data);
       
       
-      $this->model=new UserRepasitory;
+      $this->model['user']=new UserRepasitory;
       
       
       
@@ -33,7 +33,7 @@ class SecurityController extends Controller {
                 
                    $user->getFromFormData($form);
                 
-         $result=$this->model->find($user);       
+         $result=$this->model['user']->find($user);       
                 
          if($result) {
              
@@ -77,11 +77,11 @@ class SecurityController extends Controller {
                      
                     
                     
-        if(!$this->model->findNameUser($user)){
+        if(!$this->model['user']->findNameUser($user)){
             
            
                         
-                       if($this->model->addUser($user)) {Session::setFlash("User  registration  ");}
+                       if($this->model['user']->addUser($user)) {Session::setFlash("User  registration  ");}
                        
                             else {Session::setFlash("Error registration  ");};
                        
@@ -119,7 +119,7 @@ class SecurityController extends Controller {
      
      
      
-    $this->data=$this->model->getListUsers() ;
+    $this->data=$this->model['user']->getListUsers() ;
      
      
      

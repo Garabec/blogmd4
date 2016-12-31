@@ -8,7 +8,7 @@ class ContactController extends Controller{
       parent::__construct($data);
       
       
-      $this->model=new MessageRepasitory;
+      $this->model['message']=new MessageRepasitory;
       
       
       
@@ -32,7 +32,7 @@ class ContactController extends Controller{
                 
                 
                 
-          if($this->model->save($message)){
+          if($this->model['message']->save($message)){
         
                 Session::setFlash('Sent message');
         
@@ -61,7 +61,7 @@ class ContactController extends Controller{
    
    public function admin_messageAction(){
        
-      $this->data=$this->model->getListMessage();
+      $this->data=$this->model['message']->getListMessage();
        
    }
    

@@ -1,6 +1,6 @@
 
 
-<table class="table table-striped ">
+<table class="table table-striped "  wigth="100%">
     
 <tr>
         <th>Id</th>
@@ -9,6 +9,7 @@
         <th>Price</th>
         <th>IsActive</th>
         <th>Style</th>
+        <th>Action</th>
 </tr>
 
 <?php foreach ($data as $book) : ?>
@@ -22,6 +23,15 @@
 <td><?=($book->getPrice())?> </td>
 <td><?=($book->getIsActive())?> </td>
 <td><?=($book->getStyle()->getName())?> </td>
+
+<td>  
+
+<a href="/admin/book/edit_form_book/<?=$book->getId()?>" ><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
+
+<a href="#"><button type="button" class="btn btn-danger">Delete</button>  </a>
+
+
+</td>
 
 
 

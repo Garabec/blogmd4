@@ -127,7 +127,19 @@ class Book {
     }
     
     
-    
-    
+    public function getFromFormData( $form){
+        
+        
+        
+       foreach($form->getData() as $property=>$values) {
+           
+         
+              if(property_exists($this,$property)) { $this->$property=$values;}; 
+        
+        
+        }
+        
+      return $this;  
+    }
     
 }

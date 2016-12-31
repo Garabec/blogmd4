@@ -3,7 +3,7 @@
 class Controller {
     
     protected $data;
-    protected $model;
+    protected $models=array();
     protected $params;
     
     
@@ -17,7 +17,7 @@ class Controller {
      */
     public function getModel()
     {
-        return $this->model;
+        return $this->models;
     }
     
     public function getParams()

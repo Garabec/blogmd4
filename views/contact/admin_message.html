@@ -6,6 +6,7 @@
         <th>Email</th>
         <th>Message</th>
         <th>Date</th>
+        <th>Action</th>
 </tr>
 
 <?php foreach ($data as $message) : ?>
@@ -18,7 +19,14 @@
 <td><?=($message->getEmail())?> </td>
 <td><?=($message->getMessage())?> </td>
 <td><?=($message->getDate())?> </td>
+<td>  
 
+<a href="#"><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
+
+<a href="#"><button type="button" class="btn btn-danger">Delete</button>  </a>
+
+
+</td>
 
 </tr> 
 
