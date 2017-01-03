@@ -33,16 +33,16 @@ class SecurityController extends Controller {
                 
                    $user->getFromFormData($form);
                 
-         $result=$this->model['user']->find($user);       
+                $result=$this->model['user']->find($user);       
                 
          if($result) {
              
-          Session::setFlash("Sign in");   
+              Session::setFlash("Sign in");   
              
              
          } else {
              
-           Session::setFlash("User not found ");   
+              Session::setFlash("User not found ");   
              
          }      
                 
@@ -82,6 +82,7 @@ class SecurityController extends Controller {
            
                         
                        if($this->model['user']->addUser($user)) {Session::setFlash("User  registration  ");}
+                       
                        
                             else {Session::setFlash("Error registration  ");};
                        
@@ -126,6 +127,76 @@ class SecurityController extends Controller {
      
  }
     
+ 
+ 
+ public function admin_edit_form_userAction(){
+     
+     
+    $id=$this->params; 
+    
+    
+     
+    $this->data['user']=$this->model['user']->findUser($id[0]) ;
+     
+    
+     
+     
+ }
+ 
+ 
+ public function admin_user_save_editAction(){
+    
+    
+   
+    
+    
+    $form= new UserFormEdit;
+    
+    
+    
+    
+  if( $form->getRequest()->isPost()){
+    
+    
+        if($form->isValid()){
+            
+          
+          
+          $user=new User;
+         
+              $user->getFromFormData($form);
+              
+             
+                       $this->model['user']->save($user);
+                  
+    
+    App::redirect("/admin/security/users");
+         
+         
+         
+      }
+     }
+    } 
+ 
+ 
+ 
+ 
+ 
+public function admin_delete_userAction(){
+       
+       
+       $id=$this->params;
+       
+      $this->data=$this->model['user']->deleteUser($id[0]);
+      
+      
+      App::redirect("/admin/security/users");
+       
+   }  
+ 
+ 
+ 
+ 
     
     
 }

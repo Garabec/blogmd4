@@ -1,10 +1,11 @@
-<table class="table table-striped ">
+<table  style="width:100%;"  class="table table-striped ">
     
 <tr>
-        <th>Id</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Action</th>
+        <th style="width:5%;" >Id</th>
+        <th style="width:20%;" >Email</th>
+        <th  >Password</th>
+        <th style="width:20%;" >Role</th>
+        <th style="width:20%;" >Action</th>
 </tr>
 
 <?php foreach ($data as $user) : ?>
@@ -12,15 +13,16 @@
 
 
 <tr>
-<td><?=($user->getId())?> </td> 
-<td><?=($user->getEmail())?> </td>
-<td><?=($user->getPassword())?> </td>
+<td   ><?=($user->getId())?> </td> 
+<td   ><?=($user->getEmail())?> </td>
+<td  ><?=($user->getPassword())?> </td>
+<td   ><?=($user->getRole())?> </td>
 
 <td>  
 
-<a href="#"><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
+<a href="/admin/security/edit_form_user/<?=($user->getId())?>"><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
 
-<a href="#"><button type="button" class="btn btn-danger">Delete</button>  </a>
+<a href="/admin/security/delete_user/<?=($user->getId())?>"><button type="button" class="btn btn-danger">Delete</button>  </a>
 
 
 </td>

@@ -14,9 +14,12 @@ class BookController extends Controller {
   }
   
   
-    
-    
     public function indexAction(){
+      
+      
+    }
+    
+    public function listAction(){
         
         
         
@@ -43,7 +46,7 @@ class BookController extends Controller {
     
     
     
-   public function  admin_indexAction(){
+   public function  admin_listAction(){
      
      
      $this->data=$this->model['book']->getListBook() ;
@@ -84,32 +87,44 @@ class BookController extends Controller {
          
               $book->getFromFormData($form);
               
-              var_dump($book);
-              die;
+             
          
                   $this->model['book']->save($book);
                   
     
-    App::redirect("/admin/book");
+    App::redirect("/admin/book/list");
          
          
          
       }
-     
-   
-     
-     
-     
-     
-  }
+     }
+   } 
     
-    
-
-    
-    
-    
-    
-  } 
-    
+ 
+ 
+ 
+ 
+ public function admin_delete_bookAction(){
+       
+       
+       $id=$this->params;
+       
+      $this->data=$this->model['book']->deleteBook($id[0]);
+      
+      
+      App::redirect("/admin/book/list");
+       
+   } 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     
 }

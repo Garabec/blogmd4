@@ -57,7 +57,13 @@ form {
 
 .text {padding: 10px 10px 10px 10px;
        margin: 10px 10px 10px 10px;
-       text-align: inherit;
+       text-align: inherit;}
+    
+.table_align {
     
     
-}
+    
+    
+} 
+
+

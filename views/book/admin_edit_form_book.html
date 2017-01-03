@@ -4,9 +4,14 @@
 <form method="post" action="/admin/book/edit_book">
   
     <div class="form-group">
-        <label for="id">Id</label>
-      <input type="text" id="id"  name="id" class="form-control" value="<?=$data['book']->getId()?>"  >
+        <label for="id_temp">Id</label>
+      <input type="text" id="id_temp"  name="id_temp" class="form-control" value="<?=$data['book']->getId()?>" disabled  >
     </div>
+    
+    
+    <input type="hidden" id="id"  name="id" class="form-control" value="<?=$data['book']->getId()?>"   >
+    
+    
     
     <div class="form-group">
       <label for="title">Title</label>

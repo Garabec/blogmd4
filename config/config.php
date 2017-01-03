@@ -25,3 +25,5 @@ Config::set('connectionDB',array (
                            'password' => '',
                            'user'=> 'root'
                            ));   
+                           
+Config::set('role' ,array ('admin','superuser','user'));                          

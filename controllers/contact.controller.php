@@ -65,6 +65,16 @@ class ContactController extends Controller{
        
    }
    
-    
+   public function admin_message_deleteAction(){
+       
+       
+       $id=$this->params;
+       
+        $this->data=$this->model['message']->deleteMessage($id[0]);
+      
+      
+      App::redirect("/admin/contact/message");
+       
+   } 
     
 }

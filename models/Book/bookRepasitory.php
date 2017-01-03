@@ -147,7 +147,26 @@ public function save(Book $book) {
    
    
    
+public function deleteBook($id) {
+    
+    $id=(int)$id;
+    
+    
+    $data=array(
+        
+       'id'=>$id 
+        );
+    
+   $sql="delete from `book` where id=:id" ;
    
+   $result=$this->db->getConnectionDB()->prepare($sql);
+   
+    
+  return $result->execute($data);
+  
+ }   
+    
+  
    
    
    

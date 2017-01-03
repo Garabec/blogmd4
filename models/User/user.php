@@ -9,6 +9,8 @@ class User {
    
    protected $password;
    
+   protected $role;
+   
    
  /**
      * @return mixed
@@ -67,6 +69,25 @@ class User {
         
     }
   
+   
+   public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+        
+        return $this; 
+    }
+   
+   
+   
+   
    
     
     public function getFromFormData( $form){

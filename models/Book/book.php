@@ -9,7 +9,7 @@ class Book {
     private $title;
     private $description;
     private $price;
-    private $isActive;
+    private $is_active;
     private $style;
     
     
@@ -93,7 +93,7 @@ class Book {
      */
     public function getIsActive()
     {
-        return $this->isActive;
+        return $this->is_active;
     }
 
     /**
@@ -102,7 +102,7 @@ class Book {
      */
     public function setIsActive($isActive)
     {
-        $this->isActive = (bool) $isActive;
+        $this->is_active = (bool) $isActive;
         
         return $this;
     }

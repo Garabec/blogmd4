@@ -15,7 +15,7 @@ class UserRepasitory extends Model {
           
           'email' => $user->getEmail(),
           
-          'password' => $user->getPassword()
+          'password' => (new Password($user->getPassword()))->getHashPassword()
           
           )  ;
           
@@ -84,18 +84,24 @@ class UserRepasitory extends Model {
     
    public function addUser(User $user){
        
+       
+       
+       
        $data=array(
           
           'email' => $user->getEmail(),
           
-          'password' => $user->getPassword()
+          'password' => (new Password($user->getPassword()))->getHashPassword(),
           
-          )  ;
+          'role'=>'user'
+          
+          ) ;
+          
           
           
          var_dump($data) ;
           
-      $sql=$sql="insert into `user`(`email`,`password`) values(:email,:password)" ; ;
+      $sql=$sql="insert into `user`(`email`,`password`,`role`) values(:email,:password,:role)" ; 
       
       
       $sth=$this->db->getConnectionDB()->prepare($sql);
@@ -131,8 +137,8 @@ public function getListUsers() {
         
         $user->setId($row['id'])
              ->setEmail($row['email'])
-             ->setPassword($row['password']);
-             
+             ->setPassword($row['password'])
+             ->setRole($row['role']);
         
          $data[]=$user; 
         
@@ -152,6 +158,115 @@ public function getListUsers() {
     
 }
  
+ 
+ 
+ public function findUser($id){
+        
+        
+      $id=(int)$id;
+          
+      $sql="select*from `user` where `id`='$id'" ;
+      
+      
+      $result=$this->db->getConnectionDB()->query($sql);
+      
+      $row=$result->fetch(PDO::FETCH_ASSOC); 
+      
+      $user=new User;
+        
+        
+        $user->setId($row['id'])
+             ->setEmail($row['email'])
+             ->setPassword($row['password'])
+             ->setRole($row['role']);
+      
+      
+      
+      return  $user;
+      
+        
+        }
+        
+        
+  public function save(User $user) {
+      
+      
+      
+      
+      if($user->getPassword()==""){
+         
+         
+      $id=(int)$user->getId();
+      
+          
+      $sql="select `password` from `user` where `id`='$id'" ;
+      
+      
+      $result=$this->db->getConnectionDB()->query($sql);
+      
+      $row=$result->fetch(PDO::FETCH_ASSOC); 
+      
+      
+       $hash_password=$row['password'];
+        
+        
+      
+              } else {
+                        $hash_password= (new Password($user->getPassword()))->getHashPassword();
+     
+     
+     
+     
+                    };
+    
+    
+      
+     $user->setPassword($hash_password); 
+      
+      
+     $data=array(
+         
+         'email'=>$user->getEmail(),
+         'password'=>$user->getPassword(),
+         'role'=>$user->getRole(),
+         'id'=>$user->getId()
+           );
+           
+           
+           
+     $sql="update `user` set `email`=:email,`password`=:password,`role`=:role where `id`=:id" ;
+ 
+ 
+     $result=$this->db->getConnectionDB()->prepare($sql);
+     
+     
+     
+     return $result->execute($data);
+ 
+     
+     }     
+        
+        
+   public function deleteUser($id) {
+    
+    $id=(int)$id;
+    
+    
+    $data=array(
+        
+       'id'=>$id 
+        );
+    
+   $sql="delete from `user` where id=:id" ;
+   
+   $result=$this->db->getConnectionDB()->prepare($sql);
+   
+    
+  return $result->execute($data);
+  
+ }   
+    
+   
     
     
 }
