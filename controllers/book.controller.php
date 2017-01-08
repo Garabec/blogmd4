@@ -21,9 +21,7 @@ class BookController extends Controller {
     
     public function listAction(){
         
-        
-        
-      $this->data=$this->model['book']->getListBook() ; 
+      $this->data=$this->model['book']->getListBook() ;  
       
         
     }
@@ -47,9 +45,21 @@ class BookController extends Controller {
     
     
    public function  admin_listAction(){
+       
      
      
-     $this->data=$this->model['book']->getListBook() ;
+        
+        if($this->params){  $params_sort=$this->params;
+        
+        $this->data=$this->model['book']->getListBook($params_sort[0],$params_sort[1]);}
+      
+      else{$this->data=$this->model['book']->getListBook();}; 
+     
+     
+     
+     
+     
+     
      
      
    }
@@ -92,15 +102,36 @@ class BookController extends Controller {
                   $this->model['book']->save($book);
                   
     
-    App::redirect("/admin/book/list");
+    
          
          
          
-      }
+      } else 
+      
+      { 
+         
+          
+              $book=new Book;
+         
+              $book->getFromFormData($form);
+          
+          
+       
+      
+      Session::setFlash("Fill the fields");
+      
+      
+      App::redirect("/admin/book/edit_form_book/".$book->getId());
+      
+      
      }
+     
+     
+    App::redirect("/admin/book/list"); 
+     
    } 
     
- 
+  }
  
  
  
@@ -119,7 +150,18 @@ class BookController extends Controller {
  
  
  
- 
+ public function admin_sortAction(){
+       
+       
+       $parm=$this->params;
+       
+      $this->data=$this->model['book']->sortBook($parm[0],$parm[1]);
+      
+      return VIEW_DIR."/book/admin_list.html";
+      
+     // App::redirect("/admin/book/list");
+       
+   } 
  
  
  

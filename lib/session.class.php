@@ -3,14 +3,16 @@
 
 class Session {
     
-    protected static $flash_message;
+    //public static $flash_message;
     
     
     public static function setFlash($message){
         
         
-     self::$flash_message=$message;   
-        
+     //self::$flash_message=$message; 
+     
+     
+     self::set('message',$message);   
         
         
     }
@@ -18,8 +20,13 @@ class Session {
     
     public static function hasFlash(){
         
+      
+       
         
-     return !is_null (self::$flash_message) ;
+     //return !is_null (self::$flash_message) ;
+     
+     return self::has('message');
+     
         
     }
     
@@ -29,12 +36,17 @@ class Session {
     
     
     public  static function getFlash(){
+     
+     
+     
       
       if(self::hasFlash()){
         
-     echo self::$flash_message;
+     echo self::get('message');
      
-     self::$flash_message=null;
+     
+     
+     self::delete_session('message');
       } ;   
         
         
@@ -71,7 +83,25 @@ class Session {
        
    }
    
-   
+   public static function delete_session ($key){
     
+    if(self::has($key)) {
+     
+     unset($_SESSION[$key]);
+     
+    }
+    
+    
+    
+   }
+    
+  public static function destroy(){
+   
+   session_destroy();
+   
+   
+  }
+  
+  
     
 }

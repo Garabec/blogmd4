@@ -1,15 +1,99 @@
 
 
-<table class="table table-striped "  wigth="100%">
+<table class="table table-striped "  width="100%">
     
 <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>IsActive</th>
-        <th>Style</th>
-        <th>Action</th>
+        <th  style=" width:10% "  > 
+        
+       <div>
+          <div class="text">Id </div>    
+             <div class="sort_foto"> <a href="/admin/book/list/down/1" >  <img src="/img/up.jpg"></img><br>  </a>
+            </div>
+ 
+            <div class="sort_foto"> <a href="/admin/book/list/up/1" >   <img src="/img/down.jpg"></img><br>  </a>
+            </div>
+        
+      </div>  
+     
+        </th>
+        
+        
+             <th style=" width:15% "  >
+                <div>
+                      <div class="text">Title </div>    
+                         <div class="sort_foto"> <a href="/admin/book/list/down/2"  >  <img src="/img/up.jpg"></img><br>  </a>
+                         </div>
+ 
+                         <div class="sort_foto"> <a href="/admin/book/list/up/2" >   <img src="/img/down.jpg"></img><br>  </a>
+                         </div>
+        
+                </div>  
+                
+             </th>
+        <th>
+        
+        <div>
+                      <div class="text">Description </div>    
+                         <div class="sort_foto"> <a href="/admin/book/list/down/3" >  <img src="/img/up.jpg"></img><br>  </a>
+                         </div>
+ 
+                         <div class="sort_foto"> <a href="/admin/book/list/up/3" >   <img src="/img/down.jpg"></img><br>  </a>
+                         </div>
+        
+                </div>  
+        
+        </th>
+        <th style=" width:10% " >
+                 <div>
+        <div class="text">Price </div>    
+                         <div class="sort_foto"> <a href="/admin/book/list/down/4" >  <img src="/img/up.jpg"></img><br>  </a>
+                         </div>
+ 
+                         <div class="sort_foto"> <a href="/admin/book/list/up/4" >   <img src="/img/down.jpg"></img><br>  </a>
+                         </div>
+        
+                </div>  
+        
+        </th>
+        <th  style=" width:15% " >
+                
+        <div>
+        <div class="text">IsActive </div>    
+                         <div class="sort_foto"> <a href="/admin/book/list/down/5" >  <img src="/img/up.jpg"></img><br>  </a>
+                         </div>
+ 
+                         <div class="sort_foto"> <a href="/admin/book/list/up/5" >   <img src="/img/down.jpg"></img><br>  </a>
+                         </div>
+        
+                </div>  
+        
+        
+        
+        </th>
+        <th style=" width:10% " >
+        
+        <div>
+        <div class="text">Style </div>    
+                         <div class="sort_foto"> <a href="/admin/book/list/down/6" >  <img src="/img/up.jpg"></img><br>  </a>
+                         </div>
+ 
+                         <div class="sort_foto"> <a href="/admin/book/list/up/6" >   <img src="/img/down.jpg"></img><br>  </a>
+                         </div>
+        
+                </div>  
+        
+        </th>
+        <th style=" width:10% " >
+        
+        <div>
+        <div class="text">Action </div>    
+                         
+        
+                </div>  
+        
+        
+        
+        </th>
 </tr>
 
 <?php foreach ($data as $book) : ?>
@@ -17,7 +101,10 @@
 
 
 <tr>
-<td><?=($book->getId())?> </td> 
+<td><?=($book->getId())?>      
+ 
+ 
+ </td>
 <td><?=($book->getTitle())?> </td>
 <td><?=($book->getDescription())?> </td>
 <td><?=($book->getPrice())?> </td>
@@ -28,7 +115,7 @@
 
 <a href="/admin/book/edit_form_book/<?=$book->getId()?>" ><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
 
-<a href="/admin/book/delete_book/<?=($book->getId())?>"><button type="button" class="btn btn-danger">Delete</button>  </a>
+<a href="/admin/book/delete_book/<?=($book->getId())?>  "><button type="button" class="btn btn-danger">Delete</button>  </a>
 
 
 </td>

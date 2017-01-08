@@ -61,7 +61,14 @@ class ContactController extends Controller{
    
    public function admin_messageAction(){
        
-      $this->data=$this->model['message']->getListMessage();
+      //$this->data=$this->model['message']->getListMessage();
+      
+      if($this->params){  $params_sort=$this->params;
+        
+        $this->data=$this->model['message']->getListMessage($params_sort[0],$params_sort[1]);}
+      
+      else{$this->data=$this->model['message']->getListMessage();}; 
+      
        
    }
    

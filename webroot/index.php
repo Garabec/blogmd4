@@ -16,7 +16,7 @@ require_once CONFIG_DIR.DS.'init.php';
 
 //Session::setFlash('Hallo');
 
-
+ Session::start();
 App::run($_SERVER[REQUEST_URI]);
 
 

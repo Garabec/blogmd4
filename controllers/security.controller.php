@@ -60,7 +60,7 @@ class SecurityController extends Controller {
     
  
  
- public function registerAction(){
+ public function registersAction(){
      
      $form=new RegisterForm;
         
@@ -120,10 +120,14 @@ class SecurityController extends Controller {
      
      
      
-    $this->data=$this->model['user']->getListUsers() ;
+    //$this->data=$this->model['user']->getListUsers() ;
      
      
-     
+   if($this->params){  $params_sort=$this->params;
+        
+        $this->data=$this->model['user']->getListUsers($params_sort[0],$params_sort[1]);}
+      
+      else{$this->data=$this->model['user']->getListUsers();};    
      
  }
     
@@ -170,12 +174,31 @@ class SecurityController extends Controller {
                        $this->model['user']->save($user);
                   
     
-    App::redirect("/admin/security/users");
+    
          
          
          
+      }else {
+          
+           $user=new User;
+         
+           $user->getFromFormData($form);
+          
+          
+          Session::setFlash('Fill the fields');
+          
+          App::redirect('/admin/security/edit_form_user/'.$user->getId());
+          
+          
+          
+          
       }
+      
+      
      }
+     
+     App::redirect("/admin/security/users");
+     
     } 
  
  

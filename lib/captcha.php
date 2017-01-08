@@ -1,65 +1,6 @@
-<?php
-
-
-
-class RegisterForm{
-    
-  protected $data=array();
-    
-    
-    protected $request;
-    
-    
-    
-    public function __construct(){
-       
-       $this->request=new Request; 
-       
-       $this->data=$this->request->getPost();
-        
-       $this->data['captcha']=$this->captcha();
-        
-    }
-    
-    
-    public function getRequest(){
-        
-        
-     return $this->request;   
-        
-    }
-    
-    public function isValid(){
-        
-        
-        
-        return  $this->data['email']!="" && $this->data['password']!="" && $this->data['confirm_password'];
-        
-    }
-    
-    
-    public function matchPassword(){
-        
-        
-     return $this->data['password']==$this->data['confirm_password'];  
-        
-    }
-    
-    
-    public function getData(){
-        
-        
-      return $this->data;  
-        
-        
-    }
-      
-    
-   public function captcha() {
-       
-    // $securityNumber = $_GET['number'];
-    
-    $securityNumber ="String";
+ <?php
+ 
+ $securityNumber ="String";
      
 $maxHorizAngle = 20;   //Максимальный угол отклонения от горизонтали по часовой стрелке и против, по умолчанию-20
      
@@ -73,6 +14,11 @@ $imgY = 40;   // image height
 
 
 $font = dirname(__DIR__).DS."webroot".DS."font".DS. "SpicyRice.ttf";
+
+var_dump($font);
+die;
+
+
 $image = imagecreate($imgX, $imgY);
 $fontMinSize = 12;  // Min font size
 $fontMaxSize = 15;   //Max	 font size
@@ -100,21 +46,5 @@ for ($n = 0; $n < $num_n; $n++) {
             imagettftext($image, $font_size, $angle, $x, $y, $textColor, $font, $num);
 }
     
-return header("Content-type: image/png");  imagepng($image); 
+ header("Content-type: image/png");  imagepng($image); 
                    
-       
-       
-       
-       
-   }
-    
-
-
-
-public function getCaptcha() {
-    
-  return $this->data['captcha'];  
-    
-}   
-    
-}

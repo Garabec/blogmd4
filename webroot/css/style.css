@@ -55,15 +55,22 @@ form {
 
 .normal { padding: 10px 10px 10px 10px;        }
 
-.text {padding: 10px 10px 10px 10px;
-       margin: 10px 10px 10px 10px;
-       text-align: inherit;}
+.text {
+       float:left;}
     
-.table_align {
+
     
+ .sort_foto {
+     
+     height: 20px;
+              width: 20px; float:left;
+ }   
+.sort_foto img { height: 20px;
+              width: 20px;
+    float:left;
     
+}    
     
-    
-} 
+
 
 

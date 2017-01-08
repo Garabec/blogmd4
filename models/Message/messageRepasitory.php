@@ -47,10 +47,10 @@ class MessageRepasitory extends Model{
     }
     
     
-public function getListMessage(){
+public function getListMessage($action_sort="up",$num_column_sort=1){
     
     
-  $sql='select*from messages' ; 
+  $sql=$this->sortMessage($action_sort,$num_column_sort) ; 
       
       
       $result=$this->db->getConnectionDB()->query($sql);
@@ -106,5 +106,44 @@ public function deleteMessage($id) {
   return $result->execute($data);
   
  }   
+ 
+ 
+ 
+ 
+public function sortMessage($action,$num_column) {
+ 
+ 
+ if($action=="down") { $sort="desc";} else { $sort="asc";};
+ 
+ switch($num_column){
+  
+  case 1: $column="id"; break;
+  case 2: $column="name";break;
+  case 3: $column="email";break;
+  case 4: $column="message";break;
+  case 5: $column="date";break;
+  
+  
+  };
+ 
+ 
+ $sql="select*from messages order by `$column` $sort" ; 
+      
+      
+      
+      
+      
+      
+      return $sql;
+ 
+ 
+ 
+ 
+ 
+ 
+}   
+ 
+ 
+ 
     
 }

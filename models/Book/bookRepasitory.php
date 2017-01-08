@@ -5,14 +5,13 @@
 class BookRepasitory extends Model {
     
     
-    public function getListBook(){
+    public function getListBook($action_sort="up",$num_column_sort=1){
+     
+     
+     $sql=$this->sortBook($action_sort,$num_column_sort);
+     
       
-      $sql='select b.id as book_id ,b.title as book_title ,b.description as book_description ,b.price as book_price,
       
-      b.is_active as book_is_active,s.id as id_style ,b.style_id as book_style_id,s.name  as style_name from 
-      
-      
-      book b join style  s on b.style_id=s.id order by b.id' ; 
       
       
       $result=$this->db->getConnectionDB()->query($sql);
@@ -168,7 +167,43 @@ public function deleteBook($id) {
     
   
    
-   
+public function sortBook($action,$num_column) {
+ 
+ 
+ if($action=="down") { $sort="desc";} else { $sort="asc";};
+ 
+ switch($num_column){
+  
+  case 1: $column="book_id"; break;
+  case 2: $column="book_title";break;
+  case 3: $column="book_description";break;
+  case 4: $column="book_price";break;
+  case 5: $column="book_is_active";break;
+  case 6:$column="style_name";break;
+  
+  };
+ 
+ 
+ $sql="select b.id as book_id ,b.title as book_title ,b.description as book_description ,b.price as book_price,
+      
+      b.is_active as book_is_active,s.id as id_style ,b.style_id as book_style_id,s.name  as style_name from 
+      
+      
+      book b join style  s on b.style_id=s.id order by `$column` $sort" ; 
+      
+      
+      
+      
+      
+      
+      return $sql;
+ 
+ 
+ 
+ 
+ 
+ 
+}  
    
    
    
