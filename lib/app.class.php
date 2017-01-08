@@ -78,6 +78,16 @@ class App {
       
       $layout=self::$routers->getRoute();
       
+      
+      
+      if($layout=='admin') {
+          
+          
+        if(Session::get('role')!='admin') { App::redirect("/security/login") ;   };
+          
+          
+      }
+      
      
       
       $layout_path=VIEW_DIR.DS."$layout.html";  

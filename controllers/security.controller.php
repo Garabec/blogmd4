@@ -33,12 +33,26 @@ class SecurityController extends Controller {
                 
                    $user->getFromFormData($form);
                 
-                $result=$this->model['user']->find($user);       
+                $result=$this->model['user']->find($user);  
+                
+                
+                
                 
          if($result) {
              
-              Session::setFlash("Sign in");   
-             
+              Session::setFlash("Sign in"); 
+              Session::set('user',$user->getEmail());
+              
+              
+              
+              
+              if($result['role']=='admin'){
+                  
+                Session::set('role',$result['role']); 
+                  
+                App::redirect('/admin');
+                  
+              };
              
          } else {
              
@@ -58,9 +72,23 @@ class SecurityController extends Controller {
     }
     
     
+
+public function logoutAction(){
+    
+    
+ $this->model['user']->logout();   
+    
+ App::redirect('/security/login');   
+    
+}
+
+
+
+
+
  
  
- public function registersAction(){
+ public function registerAction(){
      
      $form=new RegisterForm;
         

@@ -6,6 +6,11 @@ class UserRepasitory extends Model {
     
     protected $user;
     
+   
+    
+    
+    
+    
     
     
     public function find(User $user){
@@ -15,9 +20,8 @@ class UserRepasitory extends Model {
           
           'email' => $user->getEmail(),
           
-          'password' => (new Password($user->getPassword()))->getHashPassword()
-          
-          )  ;
+          'password' => Password::getHashPassword($user->getPassword()) 
+      )  ;
           
           
          var_dump($data) ;
@@ -34,7 +38,7 @@ class UserRepasitory extends Model {
           
      $sth->execute($data); 
       
-    
+
           
         
       return  $sth->fetch(PDO::FETCH_ASSOC); 
@@ -90,8 +94,8 @@ class UserRepasitory extends Model {
        $data=array(
           
           'email' => $user->getEmail(),
-          
-          'password' => (new Password($user->getPassword()))->getHashPassword(),
+
+           'password' => Password::getHashPassword($user->getPassword()),
           
           'role'=>'user'
           
@@ -212,7 +216,7 @@ public function getListUsers($action_sort="up",$num_column_sort=1) {
         
       
               } else {
-                        $hash_password= (new Password($user->getPassword()))->getHashPassword();
+                        $hash_password=  ( new Password($user->getPassword()  -> getHashPassword()) );
      
      
      
@@ -300,6 +304,23 @@ public function sortUser($action,$num_column) {
  
  
 }   
+
+
+
+public function logout(){
+ 
+ 
+ Session::delete_session('user');
+ 
+ Session::destroy();
+ 
+ 
+ 
+}
+
+
+
+
 
     
     

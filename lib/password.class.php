@@ -3,36 +3,25 @@
 
 class Password {
     
-    protected  $password;
-    protected  $hash_password;
-    protected  $salt;
+    protected static $password;
+    protected static $hash_password;
+    protected static $salt;
+    protected static $default_salt="Happy New Year";
     
-    const  SALT_TEXT="Happy New Year";
+    
+
     
     
-public  function __construct($password_code,$salt_text=null){
     
-  $this->password=$password_code;  
-    
-  $this->salt=md5(is_null($salt_text)?$this->SALT_TEXT:$salt_text) ;
+public static function getHashPassword($password_code,$salt_text=null){
   
-  $this->hash_password=md5($this->salt.$this->password);
+  self::$password=$password_code;  
   
+  self::$salt=md5(is_null($salt_text)?self::$default_salt:$salt_text) ;
   
+  self::$hash_password=md5(self::$salt.self::$password);
   
-  
-  
-   
-  return $this ;
-    
-    
-}
-    
-    
-    
-public function getHashPassword(){
-    
-  return $this->hash_password;  
+  return self::$hash_password;  
     
 }    
     
