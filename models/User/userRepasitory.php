@@ -312,6 +312,8 @@ public function logout(){
  
  Session::delete_session('user');
  
+ Session::delete_session('role');
+ 
  Session::destroy();
  
  
