@@ -68,12 +68,12 @@ class Router{
     
     public function __construct($uri){
         
-        var_dump($uri);
+        
         
      $this->uri=urldecode(trim($uri,'/')) ;
      
      
-        var_dump($this->uri);
+       
 //--------------получаем роуты---------------     
      $this->routers=Config::get('routers');
      
@@ -84,11 +84,11 @@ class Router{
          if(preg_match("~^$uri_pattern$~",$this->uri)){
              
              
-             var_dump($this->uri);
+             
              
            $uri_path=preg_replace("~^$uri_pattern$~",$path,$this->uri); 
              
-             var_dump($uri_path);
+             
              
             $this->uri=$uri_path; 
              
@@ -114,7 +114,8 @@ class Router{
      
 //----------------присваиваем значения роутов шаблонов-----------     
      $router_layout=Config::get('routers_layout');
-     
+
+//----------------ищем если есть префиксы шаблонов админки или языкового перевода--------------     
      if(in_array(strtolower(current($uri_part)),array_keys($router_layout))){
          
        $this->router_layout=strtolower(current($uri_part));
@@ -134,7 +135,7 @@ class Router{
          
      }
     
-    
+//----------находим  контроллер , экшен , параметры --------   
     
     if(count($uri_part)){
         
@@ -157,13 +158,9 @@ class Router{
         $this->params=$uri_part;
         
         
-
-
-        
-        
-    }
+        }
     
-    
+//----------------------------------------------------------------------    
     
     
     
