@@ -6,11 +6,33 @@ Config::set('My name site','Site MVC');
 
 Config::set('language',array('en','fr'));
 
-Config::set('routers',array(
+Config::set('routers_layout',array(
     
              'default'=>'',
              'admin'=>'admin_'
 ));
+
+
+Config::set('routers',array(
+    
+             'book\/?'=>'book/list',
+             'book\/([\d]+)\/?'=>'book/view/$1',
+             'book\/[\w]+\/([\d]+)\/?'=>'book/view/$1',
+             
+             'contact\/?([\w]+)?\/?'=>'contact/send',
+             
+             'security\/login'=>'security/login',
+              
+             'security\/logout'=>'security/logout',
+             
+             'admin\/?([\w]+)?\/?'=>'admin/'
+             
+));
+
+
+
+
+
 
 
 Config::set('default_language','en');

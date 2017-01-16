@@ -19,8 +19,7 @@ class SecurityController extends Controller {
     
     
     
-    
-  public function loginAction() {
+public function loginAction() {
         
         $form=new LoginForm;
         
@@ -91,25 +90,29 @@ public function logoutAction(){
  public function registerAction(){
      
      $form=new RegisterForm;
-        
+      
+
         
         if($form->getRequest()->isPost()){
             
             if($form->isValid()){
                 
-                 if($form->matchPassword()){
+                  if($form->matchPassword()) {
+
+
+                          if($form->matchCaptcha(Session::get('captcha'))) {
                      
-                     $user=new User;
+                          $user=new User;
                 
-                         $user->getFromFormData($form);
+                                $user->getFromFormData($form);
                      
                     
                     
-        if(!$this->model['user']->findNameUser($user)){
+                                      if(!$this->model['user']->findNameUser($user)){
             
            
                         
-                       if($this->model['user']->addUser($user)) {Session::setFlash("User  registration  ");}
+                                           if($this->model['user']->addUser($user)) {Session::setFlash("User  registration  ");}
                        
                        
                             else {Session::setFlash("Error registration  ");};
@@ -123,7 +126,7 @@ public function logoutAction(){
                     } else { Session::setFlash("User found . You not registration  ");    };
                     
                     
-                    
+                   }  else { Session::setFlash("Characters not matchn ");    };
                      
                      
                  } else {Session::setFlash("Password not match  ");};
@@ -139,7 +142,6 @@ public function logoutAction(){
         } else {Session::setFlash("Fill the fields  ");};
         
     }
-    
     
 }
  

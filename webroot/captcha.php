@@ -1,6 +1,14 @@
- <?php
+<?php
  
- $securityNumber ="String";
+ session_start();
+
+
+
+$securityNumber =(string)rand(111111,999999);
+
+ $_SESSION['captcha']=$securityNumber ;  
+
+
      
 $maxHorizAngle = 20;   //Максимальный угол отклонения от горизонтали по часовой стрелке и против, по умолчанию-20
      
@@ -13,10 +21,9 @@ $imgY = 40;   // image height
 //die;
 
 
-$font = dirname(__DIR__).DS."webroot".DS."font".DS. "SpicyRice.ttf";
+$font = __DIR__. "/SpicyRice.ttf";
 
-var_dump($font);
-die;
+
 
 
 $image = imagecreate($imgX, $imgY);
@@ -24,7 +31,7 @@ $fontMinSize = 12;  // Min font size
 $fontMaxSize = 15;   //Max	 font size
 // colors allocations - text, noise, bg
 $textColor = imagecolorallocate($image, 0, 0, 0);
-$imageColor = imagecolorallocate($image, 255, 255, 255);
+$imageColor = imagecolorallocate($image, 255, 255, 210);
         
 // fill the bg of image
 imagefill($image, 0, 0, $imageColor);

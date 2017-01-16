@@ -8,12 +8,13 @@ class Router{
        
        protected $language;
        protected $method_prefix;
-       protected $router;
+       protected $router_layout;
+       protected $routers;
        protected $params;
        
        public function getRoute()
     {
-        return $this->router;
+        return $this->router_layout;
     }
 
     /**
@@ -67,26 +68,60 @@ class Router{
     
     public function __construct($uri){
         
+        var_dump($uri);
+        
      $this->uri=urldecode(trim($uri,'/')) ;
      
+     
+        var_dump($this->uri);
+//--------------получаем роуты---------------     
+     $this->routers=Config::get('routers');
+     
+     
+//================ищем совпадение с регуляркой ===================     
+     foreach($this->routers as $uri_pattern=>$path ){
+         
+         if(preg_match("~^$uri_pattern$~",$this->uri)){
+             
+             
+             var_dump($this->uri);
+             
+           $uri_path=preg_replace("~^$uri_pattern$~",$path,$this->uri); 
+             
+             var_dump($uri_path);
+             
+            $this->uri=$uri_path; 
+             
+         }
+         
+     }
+     
+//===============================================================     
+     
+     
+     
+     
+     
+     
+//=================присваиваем значение по умолчанию=================     
      $this->Language=Config::get('default_language');
      $this->controller=Config::get('default_controller');
-     $this->router=Config::get('default_router');
+     $this->router_layout=Config::get('default_router');
      $this->action=Config::get('default_action');
      
-     
+//----------------разбиваем uri -----------------------------------     
      $uri_part=preg_split('/\//',$this->uri);
      
+//----------------присваиваем значения роутов шаблонов-----------     
+     $router_layout=Config::get('routers_layout');
      
-     $routers=Config::get('routers');
-     
-     if(in_array(strtolower(current($uri_part)),array_keys($routers))){
+     if(in_array(strtolower(current($uri_part)),array_keys($router_layout))){
          
-       $this->router=strtolower(current($uri_part));
+       $this->router_layout=strtolower(current($uri_part));
        
-       $this->method_prefix=isset($routers[$this->router])?$routers[$this->router]:'';
+           $this->method_prefix=isset($router_layout[$this->router_layout])?$router_layout[$this->router_layout]:'';
        
-       array_shift($uri_part);
+                array_shift($uri_part);
        
      }  elseif (in_array(strtolower(current($uri_part)),Config::get('language'))) {
          
@@ -111,7 +146,7 @@ class Router{
            array_shift($uri_part) ;
         }
         
-        if(current($uri_part)){
+    if(current($uri_part)){
             
          $this->action=strtolower(current($uri_part));   
             
