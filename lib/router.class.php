@@ -89,7 +89,6 @@ class Router{
            $uri_path=preg_replace("~^$uri_pattern$~",$path,$this->uri); 
              
              
-             
             $this->uri=$uri_path; 
              
          }

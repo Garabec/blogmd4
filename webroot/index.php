@@ -14,18 +14,23 @@ define(CONTROLLER_DIR,ROOT.DS."controllers");
 require_once CONFIG_DIR.DS.'init.php';
 
 
-//Session::setFlash('Hallo');
 
- Session::start();
+
+Session::start();
+ 
+ try{
+     
 App::run($_SERVER[REQUEST_URI]);
 
+}catch (Exception $e){
+    
+ $e->getMessage() ; 
+    
+}catch(PDOException $a){
+    
+  $a->getMessage() ;   
+    
+}
 
 
 
-//$test=App::$db->query('select*from book');
-
-//echo '<pre>';
-
-//print_r($test);
-
-//echo '</pre>';
