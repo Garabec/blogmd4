@@ -5,10 +5,15 @@
 class BookRepasitory extends Model {
     
     
-    public function getListBook($action_sort="up",$num_column_sort=1){
+    public function getListBook($action_sort="up",$num_column_sort=1 ,$page=0,$perPage=10){
      
      
-     $sql=$this->sortBook($action_sort,$num_column_sort);
+     var_dump($page);
+     
+     
+     $view_page_books=$page*10;
+     
+     $sql=$this->sortBook($action_sort,$num_column_sort)." limit $view_page_books,$perPage";
      
       
       
@@ -207,7 +212,28 @@ public function sortBook($action,$num_column) {
    
    
    
-   
+public function countBook() {
+ 
+ 
+ 
+$sql="select count(*) as count_books from book";
+
+
+$result=$this->db->getConnectionDB()->query($sql);
+ 
+ $count=$result->fetch(PDO::FETCH_ASSOC);
+ 
+ 
+ $countBooks=$count["count_books"];
+ 
+   return $countBooks;
+ 
+ 
+ 
+ 
+ 
+ 
+}  
    
    
    

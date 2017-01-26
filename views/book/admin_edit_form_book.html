@@ -11,7 +11,7 @@
     
     <input type="hidden" id="id"  name="id" class="form-control" value="<?=$data['book']->getId()?>"   >
     
-    
+    <input type="hidden" uri_back="uri_back"  name="uri_back" class="form-control" value="<?=$_SERVER['HTTP_REFERER']?>"   >
     
     <div class="form-group">
       <label for="title">Title</label>

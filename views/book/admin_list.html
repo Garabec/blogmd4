@@ -78,11 +78,15 @@
                          </div>
  
                          <div class="sort_foto"> <a href="/admin/book/list/up/6" >   <img src="/img/down.jpg"></img><br>  </a>
+                         
+                         <!--<div class="sort_foto"> <a href="&amp;up=6" >   <img src="/img/down.jpg"></img><br>  </a>-->
+                         
                          </div>
         
                 </div>  
         
         </th>
+        
         <th style=" width:10% " >
         
         <div>
@@ -96,7 +100,7 @@
         </th>
 </tr>
 
-<?php foreach ($data as $book) : ?>
+<?php foreach ($data['book'] as $book) : ?>
 
 
 
@@ -127,3 +131,38 @@
 <?php endforeach; ?>
 
 </table>
+
+
+<div  class="row">
+ 
+    <div class="col-md-12">
+        
+         <div class="text-center">
+ 
+<br>
+<br>
+<hr>
+ 
+ <?php foreach ($data['pagination'] as $button) :  ?>
+ 
+ <?php if($button->IsActive) :   ?>
+ 
+ 
+ <!--<a href="/book/list/page/<?=$button->page ?>"> <?=$button->text?> </a>-->
+ 
+  <a href="?page=<?=$button->page ?>"> <?=$button->text?> </a>
+ 
+ 
+ <?php  else :  ?>
+ 
+ <span  style="color:#555555" > <?=$button->text?> </span>
+ 
+ <?php  endif ?>
+ 
+ <?php endforeach; ?>
+ 
+ </div>
+ 
+ </div>
+ 
+</div>

@@ -1,7 +1,7 @@
 
+<div >
 
-
-<?php foreach ($data as $book) : ?>
+<?php foreach ($data['book'] as $book) : ?>
 
  <div class="foto">
  <img src="/img/Books_87.jpg"></img><br>
@@ -10,3 +10,39 @@
  </div>
 
 <?php endforeach; ?>
+
+</div>
+
+
+<div  class="row">
+ 
+    <div class="col-md-12">
+        <div class="text-center">
+ 
+<br>
+<br>
+<hr>
+ 
+ <?php foreach ($data['pagination'] as $button) :  ?>
+ 
+ <?php if($button->IsActive) :   ?>
+ 
+ 
+ <a href="/book/list/page/<?=$button->page ?>"> <?=$button->text?> </a>
+ 
+ 
+ 
+ 
+ <?php  else :  ?>
+ 
+ <span  style="color:#555555" > <?=$button->text?> </span>
+ 
+ <?php  endif ?>
+ 
+ <?php endforeach; ?>
+ 
+ </div>
+ 
+ </div>
+ 
+</div>

@@ -38,10 +38,13 @@ class BookFormEdit{
     }
     
     
-    public function getData(){
+    public function getData($key=null){
         
-        
-      return $this->data;  
+      if(is_null($key)){
+      
+           return $this->data;
+      } else 
+            {return $this->data[$key];};
         
         
     }

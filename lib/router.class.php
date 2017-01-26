@@ -109,7 +109,7 @@ class Router{
      $this->action=Config::get('default_action');
      
 //----------------разбиваем uri -----------------------------------     
-     $uri_part=preg_split('/\//',$this->uri);
+     $uri_part=preg_split('/[\/\?\=]/',$this->uri);
      
 //----------------присваиваем значения роутов шаблонов-----------     
      $router_layout=Config::get('routers_layout');

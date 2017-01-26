@@ -11,6 +11,7 @@ class BookController extends Controller {
     $this->model['book']=new BookRepasitory;
     $this->model['style']=new StyleRepasitory;
     
+    
   }
   
   
@@ -21,7 +22,29 @@ class BookController extends Controller {
     
     public function listAction(){
         
-      $this->data=$this->model['book']->getListBook() ;  
+      $action_sort="up" ;
+      $num_column_sort=1;
+      
+      $params=$this->params; 
+      
+      $page=isset($params[1])? (int)$params[1]:1;
+      
+      
+     if($page) { $currentPage=$page ;} else {$currentPage=$page=1;};
+      
+      
+      
+      $perPage=12;
+      
+      $countItems= (int)$this->model['book']->countBook();
+      
+      
+      
+      $this->data['pagination']= (new Pagination($countItems,$perPage,$currentPage))->buttons;
+      
+     
+        
+      $this->data['book']=$this->model['book']->getListBook($action_sort,$num_column_sort,$page-1,$perPage) ;  
       
         
     }
@@ -47,13 +70,53 @@ class BookController extends Controller {
    public function  admin_listAction(){
        
      
+        
+        
+      $params=$this->params; 
+      
+      
+        
+      $action_sort=isset($params[0])? (string)$params[0]:"up" ;
+      
+      $num_column_sort=isset($params[1])? (int)$params[1]:1;  
+        
+      
+      
+      $page=isset($params[3])? (int)$params[3]:1;
+      
+      
+      if($page) { $currentPage=$page ;} else {$currentPage=$page=1;};
+      
+      
+      
+      $perPage=12;
+      
+      $countItems= (int)$this->model['book']->countBook();
+      
+      
+      
+      $this->data['pagination']= (new Pagination($countItems,$perPage,$currentPage))->buttons;
+      
      
         
-        if($this->params){  $params_sort=$this->params;
-        
-        $this->data=$this->model['book']->getListBook($params_sort[0],$params_sort[1]);}
+      $this->data['book']=$this->model['book']->getListBook($action_sort,$num_column_sort,$page-1,$perPage) ;  
       
-      else{$this->data=$this->model['book']->getListBook();}; 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+        
+      //   if($this->params){  $params_sort=$this->params;
+        
+      //   $this->data=$this->model['book']->getListBook($params_sort[0],$params_sort[1]);}
+      
+      // else{$this->data=$this->model['book']->getListBook();}; 
      
      
      
@@ -127,7 +190,7 @@ class BookController extends Controller {
      }
      
      
-    App::redirect("/admin/book/list"); 
+    App::redirect($form->getData('uri_back')); 
      
    } 
     

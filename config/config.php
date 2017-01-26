@@ -16,6 +16,9 @@ Config::set('routers_layout',array(
 Config::set('routers',array(
     
              'book\/?'=>'book/list',
+             
+             'admin\/book\/list\?page=([\d]+)'=>'admin/book/list/up/1?page=$1',
+             
              'book\/([\d]+)\/?'=>'book/view/$1',
              'book\/[\w]+\/([\d]+)\/?'=>'book/view/$1',
              
@@ -26,6 +29,8 @@ Config::set('routers',array(
              'security\/logout'=>'security/logout',
              
              'admin\/?([\w]+)?\/?'=>'admin/'
+             
+             
              
 ));
 
