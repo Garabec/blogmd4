@@ -1,6 +1,6 @@
 <?php
 
-
+use Lib\Config;
 
 Config::set('My name site','Site MVC');
 
