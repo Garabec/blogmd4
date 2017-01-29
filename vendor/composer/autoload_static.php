@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642
 {
+    public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Component\\Yaml\\' => 23,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'P' => 
         array (
@@ -23,6 +37,8 @@ class ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642::$classMap;
 

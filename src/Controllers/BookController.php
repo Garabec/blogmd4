@@ -7,6 +7,8 @@ use Lib\Pagination;
 use Lib\App;
 use Lib\Request;
 
+use Lib\PDF;
+
 use Models\Book\Book;
 use Models\Book\BookRepasitory;
 use Models\Book\BookFormEdit;
@@ -238,7 +240,34 @@ class BookController extends Controller {
    } 
  
  
- 
+ public function admin_pdfAction(){
+     
+     
+     
+      
+    $countBook= (int)$this->model['book']->countBook(); 
+    
+    
+    
+    $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
+     
+     
+     
+    $file_name="file_".time().".pdf" ;
+     
+    ob_end_clean();
+    
+     $pdf = new PDF();
+     $pdf->SetFont('Arial','',10);
+     $pdf->AddPage();
+     $pdf->EventTable($this->data['book']);
+     $pdf->Output("D",$file_name);
+     
+   
+     //App::redirect("/admin/book/list");
+     
+     
+    }
  
  
  
