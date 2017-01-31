@@ -4,6 +4,7 @@
 use Lib\Config;
 use Lib\Session;
 use Lib\App;
+use Lib\ExportServicePDF;
 
 
 use Lib\Controller;

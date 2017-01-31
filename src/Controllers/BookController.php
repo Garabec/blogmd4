@@ -6,8 +6,10 @@ use Lib\Controller;
 use Lib\Pagination;
 use Lib\App;
 use Lib\Request;
-
+use Lib\ExportServicePDF;
+use Lib\ExportServiceExel;
 use Lib\PDF;
+use Lib\Session;
 
 use Models\Book\Book;
 use Models\Book\BookRepasitory;
@@ -47,7 +49,7 @@ class BookController extends Controller {
       
       
       
-      $perPage=12;
+      $perPage=12;//todo config
       
       $countItems= (int)$this->model['book']->countBook();
       
@@ -102,7 +104,7 @@ class BookController extends Controller {
       
       
       
-      $perPage=12;
+      $perPage=12;//todo config
       
       $countItems= (int)$this->model['book']->countBook();
       
@@ -149,7 +151,14 @@ class BookController extends Controller {
         
       $this->data['book']=$this->model['book']->getIdBook($alias); 
       
-      $this->data['style']=$this->model['style']->findAll();
+      $this->data['styles']=$this->model['style']->findAll();
+      
+      $this->data['book_style']=$this->data['book']->getStyle()->getName();
+      
+      //$this->$data['book']->getStyle()->getName();
+    
+    //   var_dump($this->data['book']->getStyle()->getName());
+    //   die;
     
     
   }  
@@ -173,10 +182,15 @@ class BookController extends Controller {
          
               $book->getFromFormData($form);
               
-             
-         
-                  $this->model['book']->save($book);
-                  
+                   if($book->getId()){
+              
+                       $this->model['book']->save($book);
+                    
+                                      } else { 
+                                          
+                                          $this->model['book']->add($book);
+                                          
+                                       };
     
     
          
@@ -192,20 +206,53 @@ class BookController extends Controller {
               $book->getFromFormData($form);
           
           
+       if($book->getId()){
+      
+          Session::setFlash("Fill the fields");
+      
+          App::redirect("/admin/book/edit_form_book/".$book->getId());
+      
+       }
+       else {
+           
+           Session::setFlash("Fill the fields");
+      
+           App::redirect("/admin/book/add");
+      
+      
+            };
        
-      
-      Session::setFlash("Fill the fields");
-      
-      
-      App::redirect("/admin/book/edit_form_book/".$book->getId());
-      
+       
+       
+       
+       
+       
       
      }
      
      
-    App::redirect($form->getData('uri_back')); 
      
-   } 
+     
+     if($book->getId()){
+     
+         App::redirect($form->getData('uri_back')); 
+         
+     } else {
+         
+         $perPage=12; //todo config
+      
+         $countItems= (int)$this->model['book']->countBook();
+         
+         $page=ceil($countItems/$perPage);
+         
+         
+        App::redirect("/admin/book/list?page=$page");
+         
+     }
+     
+     }     
+     
+   
     
   }
  
@@ -240,36 +287,62 @@ class BookController extends Controller {
    } 
  
  
- public function admin_pdfAction(){
+ public function admin_pdfAction( ){
      
-     
-     
+     $pdf= new PDF;
+     $pdf_service= new ExportServicePDF($pdf);
       
-    $countBook= (int)$this->model['book']->countBook(); 
+    $countBook= (int)$this->model['book']->countBook();
     
-    
-    
-    $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
-     
-     
-     
-    $file_name="file_".time().".pdf" ;
+       $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
+       
+              $file_name="file_".time().".pdf" ;
      
     ob_end_clean();
     
-     $pdf = new PDF();
-     $pdf->SetFont('Arial','',10);
-     $pdf->AddPage();
-     $pdf->EventTable($this->data['book']);
-     $pdf->Output("D",$file_name);
-     
-   
-     //App::redirect("/admin/book/list");
-     
+    
+    $pdf_service->createDocument($file_name,$this->data['book']);
+    
+    $pdf_service->download();
+    
+    
      
     }
  
+ public function admin_exelAction(){
+     
+     $objPHPExcel = new \PHPExcel();
+     
+     $exel_service=new ExportServiceExel($objPHPExcel);
+     
+     $countBook= (int)$this->model['book']->countBook();
+    
+       $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
+       
+              $file_name="file_".time().".xls" ;
+     
+    ob_end_clean();
+     
+     $exel_service->createDocument($file_name,$this->data['book']);
+     
+     $exel_service->download();
+     
+ }
  
+ 
+ public function admin_addAction(){
+     
+     
+      $this->data['book']=new Book;
+      
+      $this->data['styles']=$this->model['style']->findAll();  
+      
+     
+      
+     
+   return VIEW_DIR."/book/admin_edit_form_book.html";  
+     
+ }
  
     
 }

@@ -12,10 +12,10 @@ class BookRepasitory extends Model {
     public function getListBook($action_sort="up",$num_column_sort=1 ,$page=0,$perPage=10){
      
      
-     var_dump($page);
      
      
-     $view_page_books=$page*10;
+     
+     $view_page_books=$page*12;
      
      $sql=$this->sortBook($action_sort,$num_column_sort)." limit $view_page_books,$perPage";
      
@@ -238,9 +238,48 @@ $result=$this->db->getConnectionDB()->query($sql);
  
  
 }  
-   
-   
-   
+  
+  
+public function add(Book $book) {
+ 
+ 
+
+ 
+ $style=$book->getStyle();
+ 
+     $sql=" select id from `style` where name='$style' ";
+ 
+           $result=$this->db->getConnectionDB()->query($sql);
+ 
+                     $style=$result->fetch(\PDO::FETCH_ASSOC);
+        
+       
+        
+        $data=array(
+              
+              'title'=>$book->getTitle(),
+              'description'=>$book->getDescription(),
+              'price'=>$book->getPrice(),
+              'is_active'=>$book->getIsActive(),
+              'style_id'=>$style['id']
+             );
+        
+               
+ $sql="insert into `book`(`title`,`description`,`price`,`is_active`,`style_id`) values(:title,:description,:price,:is_active,:style_id)" ;
+ 
+ 
+ 
+ 
+ $result=$this->db->getConnectionDB()->prepare($sql);
+     
+     
+     
+     return $result->execute($data);
+ 
+ 
+  
+ } 
+  
    
    
    

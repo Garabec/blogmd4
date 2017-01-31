@@ -82,7 +82,7 @@ class App {
         
       else {
           
-       throw new \Exception(" Нет метода $action в объекте $controller_object") ;  
+       throw new \Exception(" Нет метода $action в объекте $controller") ;  
           
           
           

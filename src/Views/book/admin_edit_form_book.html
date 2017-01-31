@@ -11,7 +11,9 @@
     
     <input type="hidden" id="id"  name="id" class="form-control" value="<?=$data['book']->getId()?>"   >
     
-    <input type="hidden" uri_back="uri_back"  name="uri_back" class="form-control" value="<?=$_SERVER['HTTP_REFERER']?>"   >
+    <input type="hidden" uri_back="uri_back"  name="uri_back" class="form-control" value="<?=Lib\Session::get('uri_back')?>"   >
+    
+    
     
     <div class="form-group">
       <label for="title">Title</label>
@@ -43,8 +45,12 @@
     <div class="form-group">
    <label for="style">Style</label>   
     <select  id="style" name="style" >
-    <option selected > <?=$data['book']->getStyle()->getName()?> </option> 
-    <?php foreach ($data['style'] as $style) : ?>  
+        
+    <option selected > <?=$data['book_style']?> </option> 
+    
+    
+    
+    <?php foreach ($data['styles'] as $style) : ?>  
     <option><?=$style->getName()?></option>
 	  <?php endforeach; ?>
     </select>

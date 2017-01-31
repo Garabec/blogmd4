@@ -36,7 +36,11 @@ class BookFormEdit{
         
         
         
-        return $this->data['title']!="" && $this->data['description']!="" && $this->data['price']!="";
+        return $this->data['title']!="" && $this->data['description']!="" && $this->data['price']!=""&& $this->data['style']!="";
+        
+        
+        
+        
         
     }
     
