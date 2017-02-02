@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Starter Template for Bootstrap</title>
 
@@ -90,6 +91,24 @@
 
    
   </body>
+  
+  <script>
+        
+
+        $("a[id|='add']").on('click', function() {
+    
+            id = $(this).attr('id').split('-');
+            
+            id = id[1];
+            
+            $.get("/book/addCart/" + id, alert('Product ' + id + ' added'));
+            
+        });
+        
+
+        
+        </script> 
+  
 </html>
 
 

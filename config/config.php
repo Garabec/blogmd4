@@ -20,7 +20,10 @@ Config::set('routers',array(
              'admin\/book\/list\?page=([\d]+)'=>'admin/book/list/up/1?page=$1',
              
              'book\/([\d]+)\/?'=>'book/view/$1',
-             'book\/[\w]+\/([\d]+)\/?'=>'book/view/$1',
+             
+             'book\/view\/([\d]+)\/?'=>'book/view/$1',
+             
+             'book\/add\/([\d]+)'=>'book/addCart/$1',
              
              'contact\/?([\w]+)?\/?'=>'contact/send',
              

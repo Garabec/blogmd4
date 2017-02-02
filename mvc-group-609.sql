@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Янв 09 2017 г., 09:42
+-- Время создания: Фев 02 2017 г., 15:19
 -- Версия сервера: 5.5.53-0ubuntu0.14.04.1
 -- Версия PHP: 5.5.9-1ubuntu4.20
 
@@ -156,16 +156,16 @@ CREATE TABLE IF NOT EXISTS `book` (
   `style_id` tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `style_id` (`style_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=300 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=308 ;
 
 --
 -- Дамп данных таблицы `book`
 --
 
 INSERT INTO `book` (`id`, `title`, `description`, `price`, `is_active`, `style_id`) VALUES
-(1, 'Ut blandit bg', 'tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum', '1905.81', 1, 8),
-(2, 'platea dictumst maecenas ut', 'erat quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis', '45564.25', 1, 6),
-(3, 'natoque penatibus et magnis dis', 'venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum', '25490.85', 0, 1),
+(1, 'Ut blandit bg', 'tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum', '1905.81', 0, 5),
+(2, 'platea dictumst maecenas ut', 'erat quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis', '45564.25', 1, 1),
+(3, 'natoque penatibus et magnis dis', 'venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum', '25490.85', 0, 6),
 (4, 'faucibus orci', 'tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis', '96742.62', 0, 10),
 (5, 'cursus vestibulum', NULL, '7916.37', 1, 9),
 (6, 'nulla mollis molestie lorem', 'potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam', '80730.95', 1, 8),
@@ -462,7 +462,15 @@ INSERT INTO `book` (`id`, `title`, `description`, `price`, `is_active`, `style_i
 (296, 'nulla facilisi cras', 'nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis', '15745.89', 0, 3),
 (297, 'habitasse platea dictumst morbi vestibulum', 'varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus', '27293.73', 1, 9),
 (298, 'risus auctor sed tristique', 'ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc', '90768.73', 1, 5),
-(299, 'morbi vestibulum', 'hdgfhhhdhdgfhh', '51677.77', 1, 5);
+(299, 'Bruklin', 'bjvkvcnmvbmcn,v ,cxv,ncxmbmv ,cmnmn nmmc, nmnmnm', '10234.00', 1, 2),
+(300, 'daetris', 'rfhkmk,mnmbvcfdgghjhknmn bvcxggjkl,mnmn vcf', '1000.00', 0, NULL),
+(301, 'Myedit', 'tffgjkkl;l;,njnbhjkl', '1000.00', 0, 8),
+(302, 'Privet', 'mvc-test3', '1000.00', 0, 10),
+(303, 'nulla mollis molestie lorem', 'my_mvc', '1000.00', 0, 8),
+(304, 'nulla mollis molestie lorem', 'my_mvc', '1000.45', 0, 8),
+(305, 'nulla mollis molestie lorem', 'mvc-test3', '10000.00', 1, 9),
+(306, 'nulla mollis molestie lorem', 'mvc-test3', '10000.00', 0, 8),
+(307, 'Myedit', 'opp', '4567.00', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -954,7 +962,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message` text,
   `date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
 
 --
 -- Дамп данных таблицы `messages`
@@ -963,7 +971,12 @@ CREATE TABLE IF NOT EXISTS `messages` (
 INSERT INTO `messages` (`id`, `name`, `email`, `message`, `date`) VALUES
 (63, 'timofei', 'dion26@yandex.ru', 'dfghj', '2016-12-25 20:29:39'),
 (64, 'timofei', 'dion26@yandex.ru', 'privet', '2017-01-03 16:14:45'),
-(65, 'timofei', 'admin@adminka.com', 'dfghj', '2017-01-08 23:05:26');
+(65, 'timofei', 'admin@adminka.com', 'dfghj', '2017-01-08 23:05:26'),
+(66, 'timofei', 'dion26@yandex.ru', 'dfiokphvjbkjl', '2017-01-09 10:20:24'),
+(67, 'timofei', 'admin@adminka.com', 'dfghj', '2017-01-11 18:15:27'),
+(68, 'timofei', 'at@volutpatornare.com', 'Ð°Ð¿Ñ€Ð¾Ð»Ð´', '2017-01-25 16:53:40'),
+(69, 'timofei', 'admin@adminka.com', 'htghjgtjtgj', '2017-01-29 10:12:23'),
+(70, 'timofei', 'admin@adminka.com', 'htghjgtjtgj', '2017-01-29 10:13:19');
 
 -- --------------------------------------------------------
 
@@ -1006,7 +1019,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` char(32) NOT NULL,
   `role` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Дамп данных таблицы `user`
@@ -1014,8 +1027,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `role`) VALUES
 (6, 'admin@adminka.com', 'eb80c2be7774054efd6fd1f9c6d181f2', 'admin'),
-(7, 'dion26@yandex.ru', 'f8e4578cdda03a69d4c6c476baebdfb6', 'superuser'),
-(8, 'at@volutpatornare.com', '5bbf9d7c9ac34744dc721e731981ccf4', 'user');
+(7, 'dion26@yandex.ru', 'eb80c2be7774054efd6fd1f9c6d181f2', 'superuser'),
+(10, 'atfhfhf@volutpatornare.com', 'f8e4578cdda03a69d4c6c476baebdfb6', 'superuser'),
+(11, 'timofei@gjhkl;l', '4ed2a49af19068e4c9167c382ef0fbe0', 'user'),
+(12, 'dioththtn26@yandex.ru', '254c7113f351630e40e07e0c38fe12ac', 'user');
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

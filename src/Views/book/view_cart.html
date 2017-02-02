@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-4 "><a  href="/book/clear_cart/"><button type="button" class="btn btn-warning  vrigth">Clear cart</button></a></div>
+</div>
+<br>
+<table class="table table-hover">
+  
+  <tr class="success">
+      
+    <th> Id </th>  
+    <th> Title </th>
+    <th> Price </th>
+    <th></th>
+  </tr>
+  <?php $i=0; $sumPrice=0 ?>
+  <?php foreach($data['books'] as $books): ?>
+  <?php $i++;?>
+  <tr class="warning">
+      
+    <th> <?=$i?> </th>  
+    <th> <?=$books->getTitle()?></th>
+    <th> <?=$books->getPrice()?>&#8372; </th>
+    <th><a  href="/book/delete_product_cart/<?=$books->getId()?>"><button type="button" class="btn btn-danger">Delete</button></a> </th>
+  </tr>
+  <?php $sumPrice+=(float)str_replace(",",".",$books->getPrice())?>
+  
+  <?php endforeach ?>
+  
+  <tr class="info">
+      
+    <th>  </th>  
+    <th class="text-right"> The amount to be paid: </th>
+    <th> <?=$sumPrice?>&#8372;</th>
+    <th>  </th> 
+  </tr>
+  
+  
+</table>
+
+<br>
+<a  href="/book/list/"><button type="button" class="btn btn-info  ">Add product</button></a>
+

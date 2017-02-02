@@ -15,7 +15,7 @@ class BookRepasitory extends Model {
      
      
      
-     $view_page_books=$page*12;
+     $view_page_books=$page*12;//todo config
      
      $sql=$this->sortBook($action_sort,$num_column_sort)." limit $view_page_books,$perPage";
      
@@ -281,7 +281,46 @@ public function add(Book $book) {
  } 
   
    
-   
+ public function getCartProduct($ids) {
+  
+  
+       $sql="select*from `book` where `id` in($ids)";
+       
+       $result=$this->db->getConnectionDB()->query($sql);
+       
+       $data=array();
+    
+       while($row=$result->fetch(\PDO::FETCH_ASSOC)){
+        
+        
+        
+        $book= new Book;
+        
+               
+               
+        
+        $book->setId($row['id'])
+             ->setTitle($row['title'])
+             ->setDescription($row['description'])
+             ->setPrice($row['price'])
+             ->setIsActive($row['is_active']);
+            
+        
+         $data[]=$book; 
+        
+        }   
+      
+      
+      
+      
+      return $data;
+      
+      
+  
+  
+  
+  
+ } 
    
    
    

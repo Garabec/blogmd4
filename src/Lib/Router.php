@@ -2,6 +2,8 @@
 
 namespace Lib;
 
+use Symfony\Component\Yaml\Yaml;
+
 class Router{
     
        protected $uri;
@@ -76,8 +78,23 @@ class Router{
      
      
        
-//--------------получаем роуты---------------     
-     $this->routers=Config::get('routers');
+//--------------получаем роуты--------------- 
+
+     //$this->routers=Config::get('routers');
+     
+     
+     $config = Yaml::parse(
+    file_get_contents(dirname(dirname(__DIR__)).'/config/routers.yml')
+);
+
+
+    $this->routers=$config['routers'];
+
+
+
+
+//var_dump($config1['routers']);
+//die;
      
      
 //================ищем совпадение с регуляркой ===================     

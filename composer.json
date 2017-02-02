@@ -2,6 +2,8 @@
     "require": {
         "setasign/fpdf": "^1.8",
         "phpoffice/phpexcel": "^1.8",
-        "symfony/yaml": "^3.2"
+        "symfony/yaml": "^3.2",
+        "symfony/config": "^3.2",
+        "symfony/routing": "^3.2"
     }
 }

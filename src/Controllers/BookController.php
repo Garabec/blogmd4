@@ -10,6 +10,7 @@ use Lib\ExportServicePDF;
 use Lib\ExportServiceExel;
 use Lib\PDF;
 use Lib\Session;
+use Lib\Cart;
 
 use Models\Book\Book;
 use Models\Book\BookRepasitory;
@@ -344,5 +345,62 @@ class BookController extends Controller {
      
  }
  
+
+     public function add_product_cartAction(){
+     
+    
+         $parm=$this->params;
+    
+         $cart=(new Cart)->addProduct($parm[0]);
+    
+    
+         App::redirect($_SERVER['HTTP_REFERER']);
+    
+    
+    }
+
+
+     public function view_cartAction(){
+    
+          $cart=(new Cart)->getProducts(true);
+          
+         
+    
+    
+        $this->data['books']=$this->model['book']->getCartProduct($cart);
+    
+    
+        
+    
+    
+    
+      }
+
+
+     public function clear_cartAction(){
+         
+         
+         $cart=(new Cart)->clear();
+         
+       App::redirect("/book/list/");  
+         
+     }
+
+
+    public function delete_product_cartAction(){
+        
+        
+        
+        $parm=$this->params;
+    
+         $cart=(new Cart)->deleteProduct($parm[0]);
+    
+    
+         App::redirect("/book/view_cart");
+        
+        
+        
+    }
+
     
 }
