@@ -13,6 +13,7 @@ use Lib\ExportServiceExel;
 use Lib\PDF;
 use Lib\Session;
 use Lib\Cart;
+use Lib\Event;
 
 use Models\Book\Book;
 use Models\Book\BookRepasitory;
@@ -34,8 +35,21 @@ class BookController extends Controller {
     
   }
   
+  public function getSubject(){
+      
+      return $this;
+  }
+  
   
     public function indexAction(){
+      
+      
+      $this->data['test']='Bed';
+      
+      $dispatcher = App::$dispatcher;
+      
+      $dispatcher->dispatch('data.view', new Event($this));
+      
       
       
     }

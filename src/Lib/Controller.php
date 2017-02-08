@@ -6,7 +6,7 @@ namespace Lib;
 
 class Controller {
     
-    protected $data;
+    public $data;
     protected $models=array();
     protected $params;
     

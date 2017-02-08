@@ -1,7 +1,7 @@
 <?php
 
 namespace Lib;
-
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 
 
@@ -10,6 +10,7 @@ class App {
     protected static $routers;
     public static $request;
     
+    public static $dispatcher ;
     
     public static $db;
     
@@ -24,6 +25,13 @@ class App {
     
     
     public static function run($uri){
+        
+        
+      $dispatcher = new EventDispatcher(); 
+      
+      $dispatcher->addListener('data.view', array(new TestEvent(), 'dataView')); 
+      
+       self::$dispatcher=$dispatcher; 
         
   //============= router==============      
         

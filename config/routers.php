@@ -6,7 +6,7 @@ return  array(
     // site routes
     
     
-    
+    'books_index' => new Route('/book/index', 'BookController', 'index'),
     'books_list' => new Route('/book/list', 'BookController', 'list'),
     'books_list_page' => new Route('/book/list\/?{page}?', 'BookController', 'list',array('page'=>'\?page=[0-9]+')),
     'books_view_cart' => new Route('/book/delete_product_cart/{id}', 'BookController', 'delete_product_cart',array('id' => '[0-9]+')),
