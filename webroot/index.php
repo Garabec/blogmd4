@@ -6,15 +6,21 @@ use Lib\Session;
 use Lib\App;
 use Lib\ExportServicePDF;
 use Lib\Configuration;
+use Lib\RepasitoryManager;
+use Controllers\BookController;
 
 
 use Lib\Controller;
 use Controllers\PageController;
 use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel;
 
-use Symfony\Component\Routing\Loader\YamlFileLoader;
+
+
 
 define(ROOT,dirname(__DIR__));
 define(DS,DIRECTORY_SEPARATOR);
@@ -32,28 +38,25 @@ require VENDOR_DIR . 'autoload.php';
 
 
 
-
-
-
 Session::start();
 
 
 
-App::run($_SERVER[REQUEST_URI]);
- 
-//  try{
-     
 // App::run($_SERVER[REQUEST_URI]);
+ 
+ try{
+     
+App::run($_SERVER[REQUEST_URI]);
 
-// }catch (\Exception $e){
+}catch (\Exception $e){
     
-//  $e->getMessage() ; 
+echo  $e->getMessage() ; 
     
-// }catch(\PDOException $a){
+}catch(\PDOException $a){
     
-//   $a->getMessage() ;   
+ echo  $a->getMessage() ;   
     
-// }
+}
 
 
 

@@ -1,12 +1,51 @@
 
  <a href="/admin/book/pdf" > <button type="button" class="btn btn-success">Download Pdf</button></a> 
- <a href="/admin/book/exel" > <button type="button" class="btn btn-info">Download Exel</button></a> 
+ <a href="/admin/book/excel" > <button type="button" class="btn btn-info">Download Excel</button></a> 
+ <a href="/api?formatter=json" > <button type="button" class="btn btn-default">API json</button></a> 
+ <a href="/api?formatter=xml" > <button type="button" class="btn btn-primary">API xml</button></a> 
  <a href="/admin/book/add" style="aligns:right" > <button type="button" class=" class= btn btn-warning pull-right">Add Book</button></a> 
 
  <?php Lib\Session::set('uri_back',$_SERVER[REQUEST_URI]); ?>
 
 <br>
+<div  class="row">
+ 
+    <div class="col-md-12">
+        
+         <div class="text-center">
+ 
 <br>
+<br>
+<hr>
+ <nav aria-label="...">
+  <ul class="pagination">
+ <?php foreach ($data['pagination'] as $button) :  ?>
+ 
+     <?php if($button->IsActive) :   ?>
+     
+         <li><a href="?page=<?=$button->page ?>"> <?=$button->text?> </a></li>
+          
+  <?php  else :  ?>
+  
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo; <?=$button->text?> </span>   </a></li>
+          
+   <?php  endif ?>
+   
+ <?php endforeach; ?>
+ </ul>
+</nav>
+ </div>
+ </div>
+ </div>
+<br>
+
+
+
+
+
+
+
+
 
 
 <table class="table table-striped "  width="100%">
@@ -149,29 +188,32 @@
          <div class="text-center">
  
 <br>
+<div  class="row">
+ 
+    <div class="col-md-12">
+        
+         <div class="text-center">
+ 
+<br>
 <br>
 <hr>
- 
+ <nav aria-label="...">
+  <ul class="pagination">
  <?php foreach ($data['pagination'] as $button) :  ?>
  
- <?php if($button->IsActive) :   ?>
- 
- 
- <!--<a href="/book/list/page/<?=$button->page ?>"> <?=$button->text?> </a>-->
- 
-  <a href="?page=<?=$button->page ?>"> <?=$button->text?> </a>
- 
- 
- <?php  else :  ?>
- 
- <span  style="color:#555555" > <?=$button->text?> </span>
- 
- <?php  endif ?>
- 
+     <?php if($button->IsActive) :   ?>
+     
+         <li><a href="?page=<?=$button->page ?>"> <?=$button->text?> </a></li>
+          
+  <?php  else :  ?>
+  
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo; <?=$button->text?> </span>   </a></li>
+          
+   <?php  endif ?>
+   
  <?php endforeach; ?>
- 
+ </ul>
+</nav>
  </div>
- 
  </div>
- 
-</div>
+ </div>

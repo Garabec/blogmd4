@@ -7,9 +7,37 @@
    </a>
  </div>
 
+
+<div  class="row">
+ 
+    <div class="col-md-12">
+        
+         <div class="text-center">
+ 
+
+
+<hr>
+ <nav aria-label="...">
+  <ul class="pagination">
+ <?php foreach ($data['pagination'] as $button) :  ?>
+ 
+     <?php if($button->IsActive) :   ?>
+     
+         <li><a href="?page=<?=$button->page ?>"> <?=$button->text?> </a></li>
+          
+  <?php  else :  ?>
+  
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo; <?=$button->text?> </span>   </a></li>
+          
+   <?php  endif ?>
+   
+ <?php endforeach; ?>
+ </ul>
+</nav>
+ </div>
+ </div>
+ </div>
 <br>
-
-
 
 <div class="row">
 
@@ -23,7 +51,7 @@
       <div class="caption">
         <h3><?=($book->getTitle())?></h3>
         <p><h3><?=$book->getPrice()?>&#8372;</h3></p>
-        <p><a href="/book/view/<?=$book->getId()?>" class="btn btn-info" role="button">More...</a> <a href="/book/add_Product_Cart/<?=$book->getId()?>"  id="add-<?=$book->getId()?>"  class="btn btn-warning" role="button">Add to cart</a></p>
+        <p><a href="/book/view/<?=$book->getId()?>" class="btn btn-info" role="button">More...</a> <a href="/book/add_product_cart/<?=$book->getId()?>"  id="add-<?=$book->getId()?>"  class="btn btn-warning" role="button">Add to cart</a></p>
       </div>
     </div>
   </div>
@@ -38,33 +66,29 @@
 <div  class="row">
  
     <div class="col-md-12">
-        <div class="text-center">
+        
+         <div class="text-center">
  
 <br>
 <br>
 <hr>
- 
+ <nav aria-label="...">
+  <ul class="pagination">
  <?php foreach ($data['pagination'] as $button) :  ?>
  
- <?php if($button->IsActive) :   ?>
- 
- 
- <a href="/book/list/page/<?=$button->page ?>"> <?=$button->text?> </a>
- 
- 
- 
- 
- <?php  else :  ?>
- 
- <span  style="color:#555555" > <?=$button->text?> </span>
- 
- <?php  endif ?>
- 
+     <?php if($button->IsActive) :   ?>
+     
+         <li><a href="?page=<?=$button->page ?>"> <?=$button->text?> </a></li>
+          
+  <?php  else :  ?>
+  
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo; <?=$button->text?> </span>   </a></li>
+          
+   <?php  endif ?>
+   
  <?php endforeach; ?>
- 
+ </ul>
+</nav>
  </div>
- 
  </div>
- 
-</div>
-
+ </div>

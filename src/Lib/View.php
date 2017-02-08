@@ -20,9 +20,12 @@ class View {
            
        }
        
-       $view_dir=$route->getController();
+       $view_dir=strtolower(str_replace('Controller',"",$route->getController()));
        
-       $view_template=$route->getMethodPrefix().$route->getAction().'.html';
+       $view_template=strtolower(str_replace('Action',"",$route->getAction())).'.html';
+       
+       
+       
        
        
        return VIEW_DIR.DS.$view_dir.DS.$view_template;
@@ -63,6 +66,8 @@ class View {
         $data=$this->data;
         
         ob_start();
+        
+    
         
         require $this->path;
         

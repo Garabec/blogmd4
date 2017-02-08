@@ -30,6 +30,14 @@ class Request{
         
     }
     
+     public function get($key,$default=null){
+        
+        
+     return isset ($this->get[$key])? $this->get[$key] :$default;  
+        
+        
+        
+    }
     
     public function getPostKey($key){
         

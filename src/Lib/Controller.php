@@ -10,6 +10,8 @@ class Controller {
     protected $models=array();
     protected $params;
     
+    protected $repo_manager;
+    
     
      public function getData()
     {
@@ -34,6 +36,7 @@ class Controller {
         
        $this->data=$data;
        $this->params=App::getRouters()->getParams();
+       $this->repo_manager=new RepasitoryManager();
         
     }
     

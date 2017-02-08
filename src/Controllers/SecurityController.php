@@ -20,7 +20,7 @@ class SecurityController extends Controller {
       parent::__construct($data);
       
       
-      $this->model['user']=new UserRepasitory;
+      $this->model['user']=$this->repo_manager->get('User');
       
       
       

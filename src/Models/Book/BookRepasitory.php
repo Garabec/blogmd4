@@ -9,13 +9,17 @@ use Lib\Request;
 class BookRepasitory extends Model {
     
     
-    public function getListBook($action_sort="up",$num_column_sort=1 ,$page=0,$perPage=10){
+    
+    
+    
+    
+    public function getListBook($action_sort="up",$num_column_sort=1 ,$page=0,$perPage=10,$data_api=false){
      
      
      
      
      
-     $view_page_books=$page*12;//todo config
+     $view_page_books=$page*24;//todo config
      
      $sql=$this->sortBook($action_sort,$num_column_sort)." limit $view_page_books,$perPage";
      
@@ -26,6 +30,14 @@ class BookRepasitory extends Model {
       $result=$this->db->getConnectionDB()->query($sql);
        
        $data=array();
+       
+       if($data_api==true){
+        
+        return $data=$result->fetchAll(\PDO::FETCH_ASSOC);
+        
+        
+       };
+       
     
        while($row=$result->fetch(\PDO::FETCH_ASSOC)){
         

@@ -20,7 +20,7 @@ class ContactController extends Controller{
       parent::__construct($data);
       
       
-      $this->model['message']=new MessageRepasitory;
+      $this->model['message']=$this->repo_manager->get('Message');
       
       
       

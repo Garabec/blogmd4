@@ -13,29 +13,29 @@ Config::set('routers_layout',array(
 ));
 
 
-Config::set('routers',array(
+// Config::set('routers',array(
     
-             'book\/?'=>'book/list',
+//              'book\/?'=>'book/list',
              
-             'admin\/book\/list\?page=([\d]+)'=>'admin/book/list/up/1?page=$1',
+//              'admin\/book\/list\?page=([\d]+)'=>'admin/book/list/up/1?page=$1',
              
-             'book\/([\d]+)\/?'=>'book/view/$1',
+//              'book\/([\d]+)\/?'=>'book/view/$1',
              
-             'book\/view\/([\d]+)\/?'=>'book/view/$1',
+//              'book\/view\/([\d]+)\/?'=>'book/view/$1',
              
-             'book\/add\/([\d]+)'=>'book/addCart/$1',
+//              'book\/add\/([\d]+)'=>'book/addCart/$1',
              
-             'contact\/?([\w]+)?\/?'=>'contact/send',
+//              'contact\/?([\w]+)?\/?'=>'contact/send',
              
-             'security\/login'=>'security/login',
+//              'security\/login'=>'security/login',
               
-             'security\/logout'=>'security/logout',
+//              'security\/logout'=>'security/logout',
              
-             'admin\/?([\w]+)?\/?'=>'admin/'
+//              'admin\/?([\w]+)?\/?'=>'admin/'
              
              
              
-));
+// ));
 
 
 
@@ -45,8 +45,8 @@ Config::set('routers',array(
 
 Config::set('default_language','en');
 Config::set('default_router','default');
-Config::set('default_controller','page');
-Config::set('default_action','index');
+Config::set('default_controller','PageController');
+Config::set('default_action','indexAction');
 
 
 Config::set('connectionDB',array (

@@ -6,6 +6,8 @@ use Lib\Controller;
 use Lib\Pagination;
 use Lib\App;
 use Lib\Request;
+
+//use Symfony\Component\HttpFoundation\Request;
 use Lib\ExportServicePDF;
 use Lib\ExportServiceExel;
 use Lib\PDF;
@@ -25,9 +27,10 @@ class BookController extends Controller {
     
     parent::__construct($data);
     
-    $this->model['book']=new BookRepasitory;
-    $this->model['style']=new StyleRepasitory;
     
+    
+    $this->model['book']=$this->repo_manager->get('Book');
+    $this->model['style']=$this->repo_manager->get('Style');
     
   }
   
@@ -50,7 +53,7 @@ class BookController extends Controller {
       
       
       
-      $perPage=12;//todo config
+      $perPage=24;//todo config
       
       $countItems= (int)$this->model['book']->countBook();
       
@@ -68,11 +71,11 @@ class BookController extends Controller {
     
     public function viewAction(){
         
-     $params=App::getRouters()->getParams(); 
+     $params=$this->params; 
      
      $alias=isset($params[0])?strtolower($params[0]):null;
         
-      //echo 'PageController -> indexAction' ; 
+    
         
       $this->data=$this->model['book']->getIdBook($alias); 
       
@@ -91,21 +94,39 @@ class BookController extends Controller {
       $params=$this->params; 
       
       
+      
+       if(($params[0]=='up'||$params[0]=='down')) 
+       {
+           
+         
         
-      $action_sort=isset($params[0])? (string)$params[0]:"up" ;
-      
-      $num_column_sort=isset($params[1])? (int)$params[1]:1;  
+         
+         $page=isset($params[3])? (int)$params[3]:1;
+         
+         $action_sort=isset($params[0])? (string)$params[0]:'up';
+         $num_column_sort=isset($params[1])? (int)$params[1]:1; 
+         
+         
+        }
         
+       
+        else{
+          
+           
+         $page=isset($params[1])? (int)$params[1]:1; 
+         $action_sort="up" ;
+         $num_column_sort=1; 
+         
+        };
       
-      
-      $page=isset($params[3])? (int)$params[3]:1;
-      
+     
+      //die;
       
       if($page) { $currentPage=$page ;} else {$currentPage=$page=1;};
       
       
       
-      $perPage=12;//todo config
+      $perPage=24;//todo config
       
       $countItems= (int)$this->model['book']->countBook();
       
@@ -240,7 +261,7 @@ class BookController extends Controller {
          
      } else {
          
-         $perPage=12; //todo config
+         $perPage=24; //todo config
       
          $countItems= (int)$this->model['book']->countBook();
          
@@ -310,7 +331,7 @@ class BookController extends Controller {
      
     }
  
- public function admin_exelAction(){
+ public function admin_excelAction(){
      
      $objPHPExcel = new \PHPExcel();
      

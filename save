@@ -1,0 +1,193 @@
+<?php
+
+
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+
+
+
+
+
+
+$request = Request::createFromGlobals();
+
+
+
+$routes = new RouteCollection();
+ 
+$routes->add('leap_year', new Route('/is_leap_year/{year}', array(
+    'year' => null,
+    '_controller' => 'LeapYearController::indexAction',
+))); 
+$routes->add('leap_year1', new Route('/', array(
+    'year' => null,
+    '_controller' => 'LeapYearController::indexAction',
+)));  
+
+$routes->add('leap_year1', new Route('/is_leap_year/', array(
+    'year' => null,
+    '_controller' => 'LeapYearController::indexAction',
+)));  
+ 
+ function is_leap_year($year = null) {
+    if (null === $year) {
+        $year = date('Y');
+    }
+ 
+    return 0 == $year % 400 || (0 == $year % 4 && 0 != $year % 100);
+}
+ 
+ 
+ 
+ 
+ class LeapYearController
+{
+    public function indexAction(Request $request)
+    
+    
+    
+    {
+        
+        
+        
+        
+        if (is_leap_year($request->attributes->get('year'))) {
+            return new Response('Yep, this is a leap year!');
+        }
+ 
+        return new Response('Nope, this is not a leap year.');
+    }
+}
+ 
+ 
+$context = new Routing\RequestContext();
+
+
+
+$context->fromRequest($request);
+
+$matcher = new Routing\Matcher\UrlMatcher($routes, $context);
+
+//var_dump($matcher);
+
+$resolver = new HttpKernel\Controller\ControllerResolver();
+
+$a=$matcher->match($request->getPathInfo());
+
+//var_dump($a);
+
+$request->attributes->add($matcher->match($request->getPathInfo()));
+var_dump($request->attributes);
+var_dump($a);
+ 
+    $controller = $resolver->getController($request);
+    $arguments = $resolver->getArguments($request, $controller);
+     
+$response = call_user_func_array($controller, $arguments);
+
+
+//var_dump($controller);
+//var_dump($arguments);
+$response->send();
+
+die;
+
+
+
+
+
+
+--------------------------------------------------------------------
+
+
+$r=new Route(
+    '/blog/{page}',
+    array(
+        '_controller' => 'BookController:list',
+        'page'        => 1,
+    ),
+    array(
+        'page' => '\d+'
+    )
+    );
+
+$request = Request::createFromGlobals();
+$context = new Routing\RequestContext();
+
+$routes = new RouteCollection();
+ 
+$routes->add('leap_year', new Route('/is_leap_year/{year}', array(
+    'year' => null,
+    '_controller' => 'LeapYearController::indexAction',
+),
+array(
+        'year' => '\d+'
+    )
+
+
+)); 
+
+$routes->add('leap_year11', new Route(
+    '/book/view/{page}',
+    array(
+        '_controller' => 'Controllers\BookController::viewAction',
+        'page'        => 1,
+    ),
+    array(
+        'page' => '\d+'
+    )
+    )
+); 
+
+
+
+$matcher = new Routing\Matcher\UrlMatcher($routes, $context);
+
+$m=$context->fromRequest($request);
+
+$a=$matcher->match($request->getPathInfo());
+
+$resolver = new HttpKernel\Controller\ControllerResolver();
+$argumentResolver = new HttpKernel\Controller\ArgumentResolver();
+
+
+//dump($a);
+//dump($matcher);
+$request->attributes->add($matcher->match($request->getPathInfo()));
+
+$controller = $resolver->getController($request);
+
+$arguments = $argumentResolver->getArguments($request, $controller);
+
+dump($arguments);
+
+$response = call_user_func_array($controller, $arguments);
+
+
+$response->send();
+
+die;
+
+
+
+
+
+
+
+
+
+
+
+
+,'page'=>'\?page=[0-9]+'
+
+
+
+
