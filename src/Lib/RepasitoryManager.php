@@ -46,7 +46,7 @@ class RepasitoryManager{
   
   if(!file_exists($path_repo_manager)){
    
-   throw new Exeption("$key.Repasitory not found");
+   throw new \Exeption("$key.Repasitory not found");
    
   }
   

@@ -27,11 +27,11 @@ class App {
     public static function run($uri){
         
         
-      $dispatcher = new EventDispatcher(); 
+      //$dispatcher = new EventDispatcher(); 
       
-      $dispatcher->addListener('data.view', array(new TestEvent(), 'dataView')); 
+      //$dispatcher->addListener('data.view', array(new TestEvent(), 'dataView')); 
       
-       self::$dispatcher=$dispatcher; 
+       //self::$dispatcher=$dispatcher; 
         
   //============= router==============      
         

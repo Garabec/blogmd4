@@ -14,6 +14,7 @@ use Lib\PDF;
 use Lib\Session;
 use Lib\Cart;
 use Lib\Event;
+use Lib\TestEvent;
 
 use Models\Book\Book;
 use Models\Book\BookRepasitory;
@@ -28,17 +29,10 @@ class BookController extends Controller {
     
     parent::__construct($data);
     
-    
-    
-    $this->model['book']=$this->repo_manager->get('Book');
-    $this->model['style']=$this->repo_manager->get('Style');
-    
+
   }
   
-  public function getSubject(){
-      
-      return $this;
-  }
+  
   
   
     public function indexAction(){
@@ -46,7 +40,9 @@ class BookController extends Controller {
       
       $this->data['test']='Bed';
       
-      $dispatcher = App::$dispatcher;
+      $dispatcher = $this->container->get('dispatcher');
+      
+      $dispatcher->addListener('data.view', array(new TestEvent(), 'dataView'));
       
       $dispatcher->dispatch('data.view', new Event($this));
       
@@ -56,9 +52,15 @@ class BookController extends Controller {
     
     public function listAction(){
         
+     $params=$this->params; 
+     
+     //dump($this->container->get('repasitory_man')->get('Book'));
+     
+     //die;
+     
      
       
-      $params=$this->params; 
+      
       
       $page=isset($params[1])? (int)$params[1]:1;
       
@@ -69,7 +71,7 @@ class BookController extends Controller {
       
       $perPage=24;//todo config
       
-      $countItems= (int)$this->model['book']->countBook();
+      $countItems= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
       
       
       
@@ -77,7 +79,7 @@ class BookController extends Controller {
       
      
         
-      $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,$page-1,$perPage) ;  
+      $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort="up",$num_column_sort=1,$page-1,$perPage) ;  
       
         
     }
@@ -91,7 +93,7 @@ class BookController extends Controller {
         
     
         
-      $this->data=$this->model['book']->getIdBook($alias); 
+      $this->data=$this->container->get('repasitory_man')->get('Book')->getIdBook($alias); 
       
       
      
@@ -142,7 +144,7 @@ class BookController extends Controller {
       
       $perPage=24;//todo config
       
-      $countItems= (int)$this->model['book']->countBook();
+      $countItems= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
       
       
       
@@ -150,7 +152,7 @@ class BookController extends Controller {
       
      
         
-      $this->data['book']=$this->model['book']->getListBook($action_sort,$num_column_sort,$page-1,$perPage) ;  
+      $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort,$num_column_sort,$page-1,$perPage) ;  
       
      
      
@@ -185,9 +187,9 @@ class BookController extends Controller {
      
      $alias=isset($params[0])?strtolower($params[0]):null;
         
-      $this->data['book']=$this->model['book']->getIdBook($alias); 
+      $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getIdBook($alias); 
       
-      $this->data['styles']=$this->model['style']->findAll();
+      $this->data['styles']=$this->container->get('repasitory_man')->get('Style')->findAll();
       
       $this->data['book_style']=$this->data['book']->getStyle()->getName();
       
@@ -220,11 +222,11 @@ class BookController extends Controller {
               
                    if($book->getId()){
               
-                       $this->model['book']->save($book);
+                       $this->container->get('repasitory_man')->get('Book')->save($book);
                     
                                       } else { 
                                           
-                                          $this->model['book']->add($book);
+                                          $this->container->get('repasitory_man')->get('Book')->add($book);
                                           
                                        };
     
@@ -277,7 +279,7 @@ class BookController extends Controller {
          
          $perPage=24; //todo config
       
-         $countItems= (int)$this->model['book']->countBook();
+         $countItems= (int)$this->$this->container->get('repasitory_man')->get('Book')->countBook();
          
          $page=ceil($countItems/$perPage);
          
@@ -299,7 +301,7 @@ class BookController extends Controller {
        
        $id=$this->params;
        
-      $this->data=$this->model['book']->deleteBook($id[0]);
+      $this->data=$this->container->get('repasitory_man')->get('Book')->deleteBook($id[0]);
       
       
       App::redirect("/admin/book/list");
@@ -314,7 +316,7 @@ class BookController extends Controller {
        
        $parm=$this->params;
        
-      $this->data=$this->model['book']->sortBook($parm[0],$parm[1]);
+      $this->data=$this->container->get('repasitory_man')->get('Book')->sortBook($parm[0],$parm[1]);
       
       return VIEW_DIR."/book/admin_list.html";
       
@@ -325,12 +327,13 @@ class BookController extends Controller {
  
  public function admin_pdfAction( ){
      
-     $pdf= new PDF;
-     $pdf_service= new ExportServicePDF($pdf);
+     
+     
+     $pdf_service=$this->container->get('service_pdf');
       
-    $countBook= (int)$this->model['book']->countBook();
+    $countBook= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
     
-       $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
+       $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
        
               $file_name="file_".time().".pdf" ;
      
@@ -347,13 +350,13 @@ class BookController extends Controller {
  
  public function admin_excelAction(){
      
-     $objPHPExcel = new \PHPExcel();
      
-     $exel_service=new ExportServiceExel($objPHPExcel);
      
-     $countBook= (int)$this->model['book']->countBook();
+     $exel_service=$this->container->get('service_excel');
+     
+     $countBook= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
     
-       $this->data['book']=$this->model['book']->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
+       $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort="up",$num_column_sort=1,0,$countBook) ;
        
               $file_name="file_".time().".xls" ;
      
@@ -371,7 +374,7 @@ class BookController extends Controller {
      
       $this->data['book']=new Book;
       
-      $this->data['styles']=$this->model['style']->findAll();  
+      $this->data['styles']=$this->container->get('repasitory_man')->get('Style')->findAll();  
       
      
       
@@ -402,7 +405,7 @@ class BookController extends Controller {
          
     
     
-        $this->data['books']=$this->model['book']->getCartProduct($cart);
+        $this->data['books']=$this->container->get('repasitory_man')->get('Book')->getCartProduct($cart);
     
     
         

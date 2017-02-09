@@ -1,29 +1,10 @@
 <?php
 
-namespace Lib;
+$sc= new Lib\ContainerBuilder();
 
-class Container {
-    
-    
- private $elements=array();
- 
- 
- public function set($key,$value){
-     
-    $elements[$key]=$value; 
-     
- }
-    
-    
-public function get($key) {
-    
-  if(isset($this->elements[$key])) {return  $this->elements[$key];}
-  
-     else {  throw new Exception("Not element container $key");};
-    
-    
-}   
-    
-    
-    
-}
+$sc->set('repasitory_man',new Lib\RepasitoryManager());
+$sc->set('service_excel', new Lib\ExportServiceExel( $objPHPExcel= new \PHPExcel ));
+$sc->set('service_pdf',new Lib\ExportServicePDF( $pdf=new Lib\PDF()));
+$sc->set('dispatcher', new \Symfony\Component\EventDispatcher\EventDispatcher());
+
+return $sc;

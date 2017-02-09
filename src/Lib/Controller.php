@@ -9,8 +9,13 @@ class Controller {
     public $data;
     protected $models=array();
     protected $params;
+    protected $container;
     
     protected $repo_manager;
+    
+    
+    
+    
     
     
      public function getData()
@@ -37,7 +42,7 @@ class Controller {
        $this->data=$data;
        $this->params=App::getRouters()->getParams();
        $this->repo_manager=new RepasitoryManager();
-        
+       $this->container=require(ROOT.DS.'src'.DS.'Lib'.DS.'Container.php');
     }
     
     

@@ -18,12 +18,7 @@ class SecurityController extends Controller {
     public function __construct($data=array()){
       
       parent::__construct($data);
-      
-      
-      $this->model['user']=$this->repo_manager->get('User');
-      
-      
-      
+    
     }
     
     
@@ -42,7 +37,7 @@ public function loginAction() {
                 
                    $user->getFromFormData($form);
                 
-                $result=$this->model['user']->find($user);  
+                $result=$this->container->get('repasitory_man')->get('User')->find($user);  
                 
                 
                 
@@ -85,7 +80,7 @@ public function loginAction() {
 public function logoutAction(){
     
     
- $this->model['user']->logout();   
+ $this->container->get('repasitory_man')->get('User')->logout();   
     
  App::redirect('/security/login');   
     
@@ -118,11 +113,11 @@ public function logoutAction(){
                      
                     
                     
-                                      if(!$this->model['user']->findNameUser($user)){
+                                      if(!$this->container->get('repasitory_man')->get('User')->findNameUser($user)){
             
            
                         
-                                           if($this->model['user']->addUser($user)) {Session::setFlash("User  registration  ");}
+                                           if($this->container->get('repasitory_man')->get('User')->addUser($user)) {Session::setFlash("User  registration  ");}
                        
                        
                             else {Session::setFlash("Error registration  ");};
@@ -165,9 +160,9 @@ public function logoutAction(){
      
    if($this->params){  $params_sort=$this->params;
         
-        $this->data=$this->model['user']->getListUsers($params_sort[0],$params_sort[1]);}
+        $this->data=$this->container->get('repasitory_man')->get('User')->getListUsers($params_sort[0],$params_sort[1]);}
       
-      else{$this->data=$this->model['user']->getListUsers();};    
+      else{$this->data=$this->container->get('repasitory_man')->get('User')->getListUsers();};    
      
  }
     
@@ -180,7 +175,7 @@ public function logoutAction(){
     
     
      
-    $this->data['user']=$this->model['user']->findUser($id[0]) ;
+    $this->data['user']=$this->container->get('repasitory_man')->get('User')->findUser($id[0]) ;
      
     
      
@@ -211,7 +206,7 @@ public function logoutAction(){
               $user->getFromFormData($form);
               
              
-                       $this->model['user']->save($user);
+                       $this->container->get('repasitory_man')->get('User')->save($user);
                   
     
     
@@ -250,7 +245,7 @@ public function admin_delete_userAction(){
        
        $id=$this->params;
        
-      $this->data=$this->model['user']->deleteUser($id[0]);
+      $this->data=$this->container->get('repasitory_man')->get('User')->deleteUser($id[0]);
       
       
       App::redirect("/admin/security/users");

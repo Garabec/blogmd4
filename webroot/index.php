@@ -42,21 +42,21 @@ Session::start();
 
 
 
-// App::run($_SERVER[REQUEST_URI]);
+ App::run($_SERVER[REQUEST_URI]);
  
- try{
+//  try{
      
-App::run($_SERVER[REQUEST_URI]);
+// App::run($_SERVER[REQUEST_URI]);
 
-}catch (\Exception $e){
+// }catch (\Exception $e){
     
-echo  $e->getMessage() ; 
+// echo  $e->getMessage() ; 
     
-}catch(\PDOException $a){
+// }catch(\PDOException $a){
     
- echo  $a->getMessage() ;   
+//  echo  $a->getMessage() ;   
     
-}
+// }
 
 
 

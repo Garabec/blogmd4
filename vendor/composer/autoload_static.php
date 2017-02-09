@@ -79,6 +79,13 @@ class ComposerStaticInit91aac7bf9548bccbb45ebd96c05a6642
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'PHPExcel' => 

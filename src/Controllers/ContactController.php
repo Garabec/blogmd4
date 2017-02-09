@@ -20,7 +20,7 @@ class ContactController extends Controller{
       parent::__construct($data);
       
       
-      $this->model['message']=$this->repo_manager->get('Message');
+      $this->model['message']=$this->container->get('repasitory_man')->get('Message');
       
       
       
@@ -42,7 +42,7 @@ class ContactController extends Controller{
               
                 $message->setDataFromForm($form);
                 
-                 if($this->model['message']->save($message)){
+                 if($this->container->get('repasitory_man')->get('Message')->save($message)){
         
                 Session::setFlash('Sent message');
         
@@ -75,9 +75,9 @@ class ContactController extends Controller{
       
       if($this->params){  $params_sort=$this->params;
         
-        $this->data=$this->model['message']->getListMessage($params_sort[0],$params_sort[1]);}
+        $this->data=$this->container->get('repasitory_man')->get('Message')->getListMessage($params_sort[0],$params_sort[1]);}
       
-      else{$this->data=$this->model['message']->getListMessage();}; 
+      else{$this->data=$this->container->get('repasitory_man')->get('Message')->getListMessage();}; 
       
        
    }
@@ -87,7 +87,7 @@ class ContactController extends Controller{
        
        $id=$this->params;
        
-        $this->data=$this->model['message']->deleteMessage($id[0]);
+        $this->data=$this->container->get('repasitory_man')->get('Message')->deleteMessage($id[0]);
       
       
       App::redirect("/admin/contact/message");
