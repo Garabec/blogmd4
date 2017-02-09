@@ -73,6 +73,9 @@ public function loginAction() {
             
         }
         
+        
+      $this->render();  
+        
     }
     
     
@@ -147,7 +150,9 @@ public function logoutAction(){
         } else {Session::setFlash("Fill the fields  ");};
         
     }
-    
+  
+  
+   $this->render(); 
 }
  
  
@@ -163,7 +168,11 @@ public function logoutAction(){
         $this->data=$this->container->get('repasitory_man')->get('User')->getListUsers($params_sort[0],$params_sort[1]);}
       
       else{$this->data=$this->container->get('repasitory_man')->get('User')->getListUsers();};    
-     
+    
+    
+    
+    
+     $this->render($this->data); 
  }
     
  
@@ -178,7 +187,7 @@ public function logoutAction(){
     $this->data['user']=$this->container->get('repasitory_man')->get('User')->findUser($id[0]) ;
      
     
-     
+  $this->render($this->data);   
      
  }
  

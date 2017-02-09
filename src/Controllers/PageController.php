@@ -12,7 +12,7 @@ class PageController extends Controller{
         
         
         
-        
+     $this->render();   
         
     }
     
@@ -21,7 +21,7 @@ class PageController extends Controller{
         
         
         
-        
+     $this->render();      
         
     }
     

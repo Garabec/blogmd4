@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class App {
     
-    protected static $routers;
+    public static $routers;
     public static $request;
     
     public static $dispatcher ;
@@ -62,11 +62,11 @@ class App {
           
          $view_path=$controller_object->$action();
          
-             $view_object=new View($controller_object->getData(),$view_path);
+            //  $view_object=new View($controller_object->getData(),$view_path);
          
-                   $content=$view_object->render();
+            //       $content=$view_object->render();
          
-                                                    } 
+                                                   } 
         
       else {
           
@@ -91,11 +91,11 @@ class App {
       
      
       
-      $layout_path=VIEW_DIR.DS."$layout.html";  
+    //   $layout_path=VIEW_DIR.DS."$layout.html";  
         
-      $layout_object=new View(compact('content'),$layout_path);
+    //   $layout_object=new View(compact('content'),$layout_path);
       
-     echo $layout_object->render();
+    //  echo $layout_object->render();
         
         
         

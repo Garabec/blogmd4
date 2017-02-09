@@ -83,7 +83,7 @@ class Router{
        
 //--------------получаем роуты--------------- 
 
-     //$this->routers=Config::get('routers');
+     
      
      
     $routers=require(dirname(dirname(__DIR__)).'/config/routers.php');
@@ -103,8 +103,7 @@ class Router{
          
            $pattern=$route->pattern;
          
-         //dump($route->pattern);
-         //dump($this->uri);
+         
          
               if(count($route->params)){
                   
@@ -113,20 +112,14 @@ class Router{
                   
                         $route->pattern=str_replace("{{$temp_key}}","($temp_value)",$route->pattern);
                    
+                    }
+                   } 
                    
-                   
-                  }
-              
-              
-              
-               }         
-         
-        
-         
-         if(preg_match("~^$route->pattern$~",$this->uri, $matches)){
+                           if(preg_match("~^$route->pattern$~",$this->uri, $matches)){
              
               
-             
+              
+              //--------------------контроллер и экшн-------------------    
              
                      $this->controller=$route->controller;
                      
@@ -139,7 +132,7 @@ class Router{
                      $params =preg_split('/[\/\?\=\#]/',$matches[1].$matches[2],-1,PREG_SPLIT_NO_EMPTY);
                      
                      
-                     
+         //-------------------вытягуем параматры если есть-------------            
                      if(count($params)){
                          
                      
@@ -148,48 +141,21 @@ class Router{
                      };
      
      
-     //dump($this->controller,$this->action,$this->params);
-     //die;
+    
                      //----------------присваиваем значения роутов шаблонов-----------     
                      $router_layout=Config::get('routers_layout');
 
-                     //----------------ищем если есть префиксы шаблонов админки или языкового перевода--------------
+                     
+                    //----------------ищем если есть роуты шаблонов вывода--------------
                      
                      $uri_part=preg_split('/[\/\?\=\#]/',$this->uri,-1,PREG_SPLIT_NO_EMPTY);
-                     
-                     
-                     
-                     
                      
                      if(in_array(strtolower(current($uri_part)),array_keys($router_layout))){
          
                          $this->router_layout=strtolower(current($uri_part));
        
-                              $this->method_prefix=isset($router_layout[$this->router_layout])?$router_layout[$this->router_layout]:'';
-                              
-                              
-       
-                      array_shift($uri_part);
-       
-                     }  elseif (in_array(strtolower(current($uri_part)),Config::get('language'))) {
-         
-         
-         
-                     $this->Language=strtolower(current($uri_part));
-       
-                      array_shift($uri_part); 
-         
-         
-                       }
-    
-                      
-             
-             
-             
-             
-             
-              
-         }
+                        }
+              }
          
      }
      

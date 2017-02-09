@@ -81,7 +81,8 @@ class BookController extends Controller {
         
       $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort="up",$num_column_sort=1,$page-1,$perPage) ;  
       
-        
+      
+      $this->render($this->data );
     }
     
     
@@ -96,7 +97,7 @@ class BookController extends Controller {
       $this->data=$this->container->get('repasitory_man')->get('Book')->getIdBook($alias); 
       
       
-     
+      $this->render($this->data );
         
     }
     
@@ -105,28 +106,17 @@ class BookController extends Controller {
    public function  admin_listAction(){
        
      
-        
-        
       $params=$this->params; 
       
-      
-      
-       if(($params[0]=='up'||$params[0]=='down')) 
-       {
-           
+         if(($params[0]=='up'||$params[0]=='down')) 
+              {
+               $page=isset($params[3])? (int)$params[3]:1;
          
-        
-         
-         $page=isset($params[3])? (int)$params[3]:1;
-         
-         $action_sort=isset($params[0])? (string)$params[0]:'up';
-         $num_column_sort=isset($params[1])? (int)$params[1]:1; 
+                     $action_sort=isset($params[0])? (string)$params[0]:'up';
+                           $num_column_sort=isset($params[1])? (int)$params[1]:1; 
          
          
-        }
-        
-       
-        else{
+        } else{
           
            
          $page=isset($params[1])? (int)$params[1]:1; 
@@ -134,50 +124,25 @@ class BookController extends Controller {
          $num_column_sort=1; 
          
         };
+        
+        
+     if($page) { $currentPage=$page ;} else {$currentPage=$page=1;};
       
-     
-      //die;
+          $perPage=24;//todo config
       
-      if($page) { $currentPage=$page ;} else {$currentPage=$page=1;};
-      
-      
-      
-      $perPage=24;//todo config
-      
-      $countItems= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
+                 $countItems= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
       
       
       
-      $this->data['pagination']= (new Pagination($countItems,$perPage,$currentPage))->buttons;
+                        $this->data['pagination']= (new Pagination($countItems,$perPage,$currentPage))->buttons;
       
      
         
-      $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort,$num_column_sort,$page-1,$perPage) ;  
+                            $this->data['book']=$this->container->get('repasitory_man')->get('Book')->getListBook($action_sort,$num_column_sort,$page-1,$perPage) ;  
       
      
-     
-     
-     
-     
-     
-     
-     
-     
-     
-        
-      //   if($this->params){  $params_sort=$this->params;
-        
-      //   $this->data=$this->model['book']->getListBook($params_sort[0],$params_sort[1]);}
-      
-      // else{$this->data=$this->model['book']->getListBook();}; 
-     
-     
-     
-     
-     
-     
-     
-     
+        $this->render($this->data);
+   
    }
     
     
@@ -193,10 +158,7 @@ class BookController extends Controller {
       
       $this->data['book_style']=$this->data['book']->getStyle()->getName();
       
-      //$this->$data['book']->getStyle()->getName();
-    
-    //   var_dump($this->data['book']->getStyle()->getName());
-    //   die;
+      $this->render($this->data );
     
     
   }  
@@ -279,7 +241,7 @@ class BookController extends Controller {
          
          $perPage=24; //todo config
       
-         $countItems= (int)$this->$this->container->get('repasitory_man')->get('Book')->countBook();
+         $countItems= (int)$this->container->get('repasitory_man')->get('Book')->countBook();
          
          $page=ceil($countItems/$perPage);
          
@@ -377,9 +339,9 @@ class BookController extends Controller {
       $this->data['styles']=$this->container->get('repasitory_man')->get('Style')->findAll();  
       
      
-      
+   $this->render($this->data,VIEW_DIR."/book/admin_edit_form_book.html");   
      
-   return VIEW_DIR."/book/admin_edit_form_book.html";  
+   //return VIEW_DIR."/book/admin_edit_form_book.html";  
      
  }
  
@@ -409,7 +371,7 @@ class BookController extends Controller {
     
     
         
-    
+    $this->render($this->data);
     
     
       }

@@ -53,6 +53,9 @@ class ContactController extends Controller{
      
      }
     
+    
+    $this->render();
+    
     }
     
     public function viewAction(){
@@ -60,7 +63,7 @@ class ContactController extends Controller{
       $this->data['contact']='Views ContactController->viewAction';
       
      //echo "ContactController->indexAction" ;
-        
+      $this->render($this->data);  
     }
     
    
@@ -74,7 +77,7 @@ class ContactController extends Controller{
       
       else{$this->data=$this->container->get('repasitory_man')->get('Message')->getListMessage();}; 
       
-       
+     $this->render($this->data);  
    }
    
    public function admin_message_deleteAction(){

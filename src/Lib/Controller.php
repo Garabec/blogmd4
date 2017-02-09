@@ -46,7 +46,7 @@ class Controller {
     }
     
     
-   public function render($data=array(),$path=null){
+   public function render($data_render=array(),$path=null){
        
      if(is_null($path)){
          
@@ -61,22 +61,24 @@ class Controller {
        
        $path=VIEW_DIR.DS.$view_dir.DS.$view_template;
         
-         
+        
         }  
        
-       $this->data=$data;
+       $data=$data_render; 
+       
+      // dump($data['book']);
        
             ob_start();
        
-       require($path);
+       require $path;
        
        $content=ob_get_clean();
        
            ob_start();
            
-           require App::$routers->getRoute().'html';
+           require VIEW_DIR.DS.App::$routers->getRoute().'.html';
        
-           return ob_get_clean();
+           echo  ob_get_clean();
        
        
    } 
