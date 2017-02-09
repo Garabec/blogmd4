@@ -46,6 +46,39 @@ class Controller {
     }
     
     
-    
+   public function render($data=array(),$path=null){
+       
+     if(is_null($path)){
+         
+        $route=App::getRouters();
+       
+            if(!$route){  throw new \Exception('Роутер не получен getDefaultPath') ;  };
+       
+                    $view_dir=strtolower(str_replace('Controller',"",$route->getController()));
+       
+                         $view_template=strtolower(str_replace('Action',"",$route->getAction())).'.html';
+       
+       
+       $path=VIEW_DIR.DS.$view_dir.DS.$view_template;
+        
+         
+        }  
+       
+       $this->data=$data;
+       
+            ob_start();
+       
+       require($path);
+       
+       $content=ob_get_clean();
+       
+           ob_start();
+           
+           require App::$routers->getRoute().'html';
+       
+           return ob_get_clean();
+       
+       
+   } 
     
 }

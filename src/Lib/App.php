@@ -78,6 +78,8 @@ class App {
       $layout=self::$routers->getRoute();
       
       
+      
+      
   //--------------проверка при входе в админ панель существует ли сессия админа    
       if($layout=='admin') {
           

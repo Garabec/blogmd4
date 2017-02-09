@@ -19,11 +19,6 @@ class ContactController extends Controller{
       
       parent::__construct($data);
       
-      
-      $this->model['message']=$this->container->get('repasitory_man')->get('Message');
-      
-      
-      
     }
     
     
