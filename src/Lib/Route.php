@@ -21,7 +21,21 @@ class Route {
     }
     
     
+   
     
+    
+    public function getController(){
+        
+        return $this->controller;
+        
+    }
+    
+    public function getAction(){
+        
+        return $this->action;
+        
+    }
     
     
 }
+

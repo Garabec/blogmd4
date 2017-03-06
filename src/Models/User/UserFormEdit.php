@@ -37,7 +37,7 @@ class UserFormEdit{
         
         
         
-        return $this->data['email']!="" && $this->data['role']!="";
+        return $this->data['name']!="" && $this->data['role']!="";
         
     }
     

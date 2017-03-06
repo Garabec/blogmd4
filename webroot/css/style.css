@@ -92,3 +92,22 @@ form {
   
 }
 
+.modal_form_width{
+    
+  width: 200px;  
+    
+    
+}
+
+.reclam{
+    
+    height: 200px;
+    width: 100%;
+  
+    background-color: maroon;  
+    color: #999; /* Цвет текста */ 
+    
+   
+    
+    
+}

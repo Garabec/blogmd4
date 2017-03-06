@@ -1,0 +1,77 @@
+
+<a href="/admin/post/News"> <button type="button" class="btn btn-primary">News</button></a>
+
+<!-- Indicates a successful or positive action -->
+<a href="/admin/post/Sport"><button type="button" class="btn btn-success">Sport</button></a>
+
+<!-- Contextual button for informational alert messages -->
+<a href="/admin/post/World"><button type="button" class="btn btn-info">World</button></a>
+
+<!-- Indicates caution should be taken with this action -->
+<a href="/admin/post/Politic"><button type="button" class="btn btn-warning">Politic</button></a><br><br>
+
+<table class="table table-striped "  width="100%">
+    
+<tr>
+<th  style=" width:10% "  > Id
+</th>
+ <th  style=" width:10% "  > Title
+</th>
+<th  style=" width:50% "  > Body
+</th>
+<th  style=" width:10% "  > CreatedAt
+</th>
+<th  style=" width:10% "  > Category
+</th>
+<th  style=" width:10% "  > Author
+</th>
+ <th  style=" width:10% "  > Action
+</th>   
+</tr>
+
+<?php foreach ($data['posts'] as $post) : ?>
+
+
+
+<tr>
+<td><?=$post->getId()?></td>
+<td><?=$post->getTitle()?> </td>
+<td><?=$post->getBody()?> </td>
+<td><?=$post->getCreatedAt()?> </td>
+<td><?=$post->getCategory()?> </td>
+<td><?=$post->getAuthor()?> </td>
+
+
+<td>  
+
+<a href="/admin/editpost/<?=$post->getId()?>" ><button type="button" class="btn btn-primary">Edit</button> </a> <br><br>
+
+<a href="#"><button type="button" class="btn btn-danger" onclick="return DeleteItem()"   >Delete</button>  </a>
+
+
+</td>
+
+<?php endforeach; ?>
+
+</tr> 
+
+</table>
+
+
+<nav aria-label="...">
+  <ul class="pagination">
+ <?php foreach ($data['buttons'] as $button) :  ?>
+ 
+     <?php if($button->IsActive) :   ?>
+     
+         <li><a href="?page=<?=$button->page ?>"> <?=$button->text?> </a></li>
+          
+  <?php  else :  ?>
+  
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo; <?=$button->text?> </span>   </a></li>
+          
+   <?php  endif ?>
+   
+ <?php endforeach; ?>
+ </ul>
+</nav>         

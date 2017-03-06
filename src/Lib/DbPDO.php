@@ -8,11 +8,16 @@ class DbPDO{
     
     protected $connection;
     
- public function __construct($host,$user,$password,$dbname) {
+ public function __construct($db=array()) {
+     
+     extract($db);
+     
+    
      
     $this->connection= new \PDO("mysql:host=$host;dbname=$dbname",$user,$password); 
     
     $this->connection->setAttribute( \PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION ); 
+     
      
       }  
     

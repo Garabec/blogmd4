@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8bbe4a0e88d7b4ac12349c0e0b6b4d6e",
-    "content-hash": "f923b293d6cdbfda0f8132d7b7a826e8",
+    "hash": "b70cae7c3963db6f2c6fe3ee71b789cd",
+    "content-hash": "3eccebb128ebe65a6ba64ca5ef819e46",
     "packages": [
         {
             "name": "phpoffice/phpexcel",
@@ -819,12 +819,49 @@
                 "templating"
             ],
             "time": "2017-01-11 19:36:15"
+        },
+        {
+            "name": "vsn4ik/bootstrap-submenu",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vsn4ik/bootstrap-submenu.git",
+                "reference": "2bfc7016ed96001b209f3402bb0b2ec7624d9ee6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vsn4ik/bootstrap-submenu/zipball/2bfc7016ed96001b209f3402bb0b2ec7624d9ee6",
+                "reference": "2bfc7016ed96001b209f3402bb0b2ec7624d9ee6",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vasily A.",
+                    "homepage": "https://github.com/vsn4ik"
+                }
+            ],
+            "description": "Bootstrap Sub-Menus",
+            "homepage": "http://vsn4ik.github.io/bootstrap-submenu",
+            "keywords": [
+                "bootstrap",
+                "dropdown",
+                "jquery-plugin",
+                "submenu"
+            ],
+            "time": "2017-01-15 00:15:33"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "vsn4ik/bootstrap-submenu": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

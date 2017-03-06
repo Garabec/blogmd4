@@ -1,0 +1,22 @@
+<h1><a href='#'><?=$data['category']->getName()?></a></h1>
+           <?php foreach($data['category']->getPosts() as $post): ?>
+           <h2><a href="/post/<?=$post->getId()?>" class="text-warning" ><?=$post->getTitle()?></a></h2> <br>
+              <?php endforeach; ?>
+                        
+ <nav aria-label="...">
+  <ul class="pagination">
+ <?php foreach ($data['buttons'] as $button) :  ?>
+ 
+     <?php if($button->IsActive) :   ?>
+     
+         <li><a href="?page=<?=$button->page ?>"> <?=$button->text?> </a></li>
+          
+  <?php  else :  ?>
+  
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo; <?=$button->text?> </span>   </a></li>
+          
+   <?php  endif ?>
+   
+ <?php endforeach; ?>
+ </ul>
+</nav>           

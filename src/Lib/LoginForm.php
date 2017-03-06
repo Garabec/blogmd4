@@ -33,7 +33,7 @@ class LoginForm{
         
         
         
-        return  $this->data['email']!="" && $this->data['password']!="";
+        return  $this->data['name']!="" && $this->data['password']!="";
         
     }
     

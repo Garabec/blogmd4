@@ -4,12 +4,15 @@
 namespace Lib;
 
 
+
+
 class Controller {
     
     public $data;
     protected $models=array();
     protected $params;
     protected $container;
+    protected $layout;
     
     protected $repo_manager;
     
@@ -37,36 +40,63 @@ class Controller {
     }
     
     
+    
+    public function setRouter( Router $router){
+        
+        
+       $this->router=$router; 
+        
+    }
+   
+   
+   public function getRouter(){
+       
+      return $this->router; 
+       
+   }
+    
     public function __construct( $data=array()){
         
        $this->data=$data;
-       $this->params=App::getRouters()->getParams();
-       $this->repo_manager=new RepasitoryManager();
+       
+       
+       
        $this->container=require(ROOT.DS.'src'.DS.'Lib'.DS.'Container.php');
+       
+       
     }
     
     
    public function render($data_render=array(),$path=null){
        
+       
+       
+      $router=$this->getRouter();
+      
+      
+      
+       
+       
      if(is_null($path)){
          
-        $route=App::getRouters();
+        
+        
+              $view_dir=strtolower(str_replace('Controller',"",$router->getRoute()->getController()));
        
-            if(!$route){  throw new \Exception('Роутер не получен getDefaultPath') ;  };
-       
-                    $view_dir=strtolower(str_replace('Controller',"",$route->getController()));
-       
-                         $view_template=strtolower(str_replace('Action',"",$route->getAction())).'.html';
+                         $view_template=strtolower($router->getRoute()->getAction()).'.html';
        
        
-       $path=VIEW_DIR.DS.$view_dir.DS.$view_template;
+      $path=VIEW_DIR.DS.$view_dir.DS.$view_template;
+      
+     
         
         
         }  
        
        $data=$data_render; 
        
-      // dump($data['book']);
+      $active=strtolower($router->getRoute()->getAction());
+      
        
             ob_start();
        
@@ -74,9 +104,11 @@ class Controller {
        
        $content=ob_get_clean();
        
+       
+       
            ob_start();
            
-           require VIEW_DIR.DS.App::$routers->getRoute().'.html';
+           require VIEW_DIR.DS.$router->getRoute_Layout().'.html';
        
            echo  ob_get_clean();
        

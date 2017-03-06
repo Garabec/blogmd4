@@ -4,7 +4,7 @@ use Lib\Config;
 
 Config::set('My name site','Site MVC');
 
-Config::set('language',array('en','fr'));
+
 
 Config::set('routers_layout',array(
     
@@ -13,45 +13,20 @@ Config::set('routers_layout',array(
 ));
 
 
-// Config::set('routers',array(
-    
-//              'book\/?'=>'book/list',
-             
-//              'admin\/book\/list\?page=([\d]+)'=>'admin/book/list/up/1?page=$1',
-             
-//              'book\/([\d]+)\/?'=>'book/view/$1',
-             
-//              'book\/view\/([\d]+)\/?'=>'book/view/$1',
-             
-//              'book\/add\/([\d]+)'=>'book/addCart/$1',
-             
-//              'contact\/?([\w]+)?\/?'=>'contact/send',
-             
-//              'security\/login'=>'security/login',
-              
-//              'security\/logout'=>'security/logout',
-             
-//              'admin\/?([\w]+)?\/?'=>'admin/'
-             
-             
-             
-// ));
 
 
 
 
 
 
-
-Config::set('default_language','en');
 Config::set('default_router','default');
-Config::set('default_controller','PageController');
+Config::set('default_controller','PostController');
 Config::set('default_action','indexAction');
 
 
 Config::set('connectionDB',array (
                            'host' => 'localhost',
-                           'dbname' => 'mvc-group-609',
+                           'dbname' => 'blog',
                            'password' => '',
                            'user'=> 'root'
                            ));   

@@ -8,6 +8,7 @@ use Lib\ContactForm;
 use Models\Message\Message;
 use Lib\Session;
 use Lib\App;
+use Lib\Request;
 
 
 
@@ -67,11 +68,11 @@ class ContactController extends Controller{
     }
     
    
-   public function admin_messageAction(){
+   public function admin_messageAction(Request $request){
        
       //$this->data=$this->model['message']->getListMessage();
       
-      if($this->params){  $params_sort=$this->params;
+      if(count($request->get('params'))){  $params_sort=$request->get('params');
         
         $this->data=$this->container->get('repasitory_man')->get('Message')->getListMessage($params_sort[0],$params_sort[1]);}
       
@@ -80,10 +81,12 @@ class ContactController extends Controller{
      $this->render($this->data);  
    }
    
-   public function admin_message_deleteAction(){
+   public function admin_message_deleteAction(Request $request){
        
        
-       $id=$this->params;
+       $id=$request->get('params');
+       
+       
        
         $this->data=$this->container->get('repasitory_man')->get('Message')->deleteMessage($id[0]);
       

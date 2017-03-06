@@ -6,10 +6,12 @@ class RepasitoryManager{
     
     
  private $repasitories=array();
+ private $db_connection;
  
  
- public function __construct(){
+ public function __construct(DbPDO $db){
   
+  $this->db_connection=$db;
   return $this;
   
  }
@@ -54,7 +56,7 @@ class RepasitoryManager{
   
   
   
- $repo_class= new $class();
+ $repo_class= new $class($this->db_connection);
  
  $this->set($key,$repo_class);
  

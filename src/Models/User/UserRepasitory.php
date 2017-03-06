@@ -3,17 +3,24 @@
 
 namespace Models\User;
 
-use Lib\Model;
+
 use Lib\Password;
 use Models\User\User;
 use Lib\Session;
+use Lib\DbPDO;
 
-class UserRepasitory extends Model {
+class UserRepasitory  {
     
     
     protected $user;
     
-   
+    private $db;
+    
+    public function __construct(DbPDO $db){
+     
+    $this->db=$db;
+     
+    }
     
     
     
@@ -25,15 +32,15 @@ class UserRepasitory extends Model {
         
       $data=array(
           
-          'email' => $user->getEmail(),
+          'name' => $user->getName(),
           
           'password' => Password::getHashPassword($user->getPassword()) 
       )  ;
           
           
-         var_dump($data) ;
+        // var_dump($data) ;
           
-      $sql="select*from `user` where `email`=:email and `password`=:password" ;
+      $sql="select*from `user` where `name`=:name and `password`=:password" ;
       
       
       $sth=$this->db->getConnectionDB()->prepare($sql);
@@ -61,16 +68,16 @@ class UserRepasitory extends Model {
         
       $data=array(
           
-          'email' => $user->getEmail()
+          'name' => $user->getName()
           
           
           
           )  ;
           
           
-         var_dump($data) ;
+        // var_dump($data) ;
           
-      $sql="select*from `user` where `email`=:email" ;
+      $sql="select*from `user` where `name`=:name" ;
       
       
       $sth=$this->db->getConnectionDB()->prepare($sql);
@@ -93,6 +100,42 @@ class UserRepasitory extends Model {
     }
     
     
+    public function findidUser($user){
+        
+        
+      $data=array(
+          
+          'name' => $user
+          
+          
+          
+          )  ;
+          
+          
+        // var_dump($data) ;
+          
+      $sql="select id from `user` where `name`=:name" ;
+      
+      
+      $sth=$this->db->getConnectionDB()->prepare($sql);
+      
+      
+      
+     
+          
+          
+     $sth->execute($data); 
+      
+    
+          
+        
+      return  $sth->fetch(\PDO::FETCH_ASSOC); 
+        
+        
+        
+        
+    }
+    
    public function addUser(User $user){
        
        
@@ -100,7 +143,7 @@ class UserRepasitory extends Model {
        
        $data=array(
           
-           'email' => $user->getEmail(),
+           'name' => $user->getName(),
 
            'password' => Password::getHashPassword($user->getPassword()),
           
@@ -112,7 +155,7 @@ class UserRepasitory extends Model {
           
          
           
-      $sql=$sql="insert into `user`(`email`,`password`,`role`) values(:email,:password,:role)" ; 
+      $sql=$sql="insert into `user`(`name`,`password`,`role`) values(:name,:password,:role)" ; 
       
       
       $sth=$this->db->getConnectionDB()->prepare($sql);
@@ -147,7 +190,7 @@ public function getListUsers($action_sort="up",$num_column_sort=1) {
         
         
         $user->setId($row['id'])
-             ->setEmail($row['email'])
+             ->setName($row['name'])
              ->setPassword($row['password'])
              ->setRole($row['role']);
         
@@ -187,7 +230,7 @@ public function getListUsers($action_sort="up",$num_column_sort=1) {
         
         
         $user->setId($row['id'])
-             ->setEmail($row['email'])
+             ->setName($row['name'])
              ->setPassword($row['password'])
              ->setRole($row['role']);
       
@@ -237,7 +280,7 @@ public function getListUsers($action_sort="up",$num_column_sort=1) {
       
      $data=array(
          
-         'email'=>$user->getEmail(),
+         'name'=>$user->getName(),
          'password'=>$user->getPassword(),
          'role'=>$user->getRole(),
          'id'=>$user->getId()
@@ -245,7 +288,7 @@ public function getListUsers($action_sort="up",$num_column_sort=1) {
            
            
            
-     $sql="update `user` set `email`=:email,`password`=:password,`role`=:role where `id`=:id" ;
+     $sql="update `user` set `name`=:name,`password`=:password,`role`=:role where `id`=:id" ;
  
  
      $result=$this->db->getConnectionDB()->prepare($sql);
@@ -287,7 +330,7 @@ public function sortUser($action,$num_column) {
  switch($num_column){
   
   case 1: $column="id"; break;
-  case 2: $column="email";break;
+  case 2: $column="name";break;
   case 3: $column="password";break;
   case 4: $column="role";break;
   

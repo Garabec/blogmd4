@@ -13,13 +13,27 @@ class Router{
        protected $language;
        protected $method_prefix;
        protected $router_layout;
+       protected $route;
        protected $routers;
        protected $params;
+       public $request;
        
-       public function getRoute()
+       
+    
+       
+       
+       
+       
+       public function getRoute_Layout()
     {
         return $this->router_layout;
     }
+
+     public function getRoute()
+    {
+        return $this->route;
+    }
+
 
     /**
      * @return mixed
@@ -70,11 +84,12 @@ class Router{
     }
     
     
-    public function __construct($uri){
+    public function __construct(Request $request){
         
-        
+       $this->request=$request;
+       $uri=$request->getUri();   
        
-        
+       
         
         
      $this->uri=urldecode(rtrim($uri,'/')) ;
@@ -96,6 +111,14 @@ class Router{
      $this->controller=Config::get('default_controller');
      $this->router_layout=Config::get('default_router');
      $this->action=Config::get('default_action');
+     $this->route=$routers['default'];
+     
+     
+     
+     
+                      
+                     
+     
      
 //================ищем совпадение с регуляркой ===================     
      foreach($routers as $route ){
@@ -117,7 +140,12 @@ class Router{
                    
                            if(preg_match("~^$route->pattern$~",$this->uri, $matches)){
              
-              
+                       array_shift($matches);
+             
+             $params=$matches;
+                        
+                           $this->route=$route;
+                         
               
               //--------------------контроллер и экшн-------------------    
              
@@ -129,14 +157,19 @@ class Router{
                      
            
              
-                     $params =preg_split('/[\/\?\=\#]/',$matches[1].$matches[2],-1,PREG_SPLIT_NO_EMPTY);
+                     //$params =preg_split('/[\/\?\=\#]/',$matches,-1,PREG_SPLIT_NO_EMPTY);
                      
                      
-         //-------------------вытягуем параматры если есть-------------            
+         //-------------------вытягуем параматры если есть------------- 
+         
                      if(count($params)){
                          
                      
                      $this->params=$params;
+                     
+                     $this->request->mergeGET(['params'=>$params]);
+                     
+                    
                      
                      };
      
@@ -144,7 +177,9 @@ class Router{
     
                      //----------------присваиваем значения роутов шаблонов-----------     
                      $router_layout=Config::get('routers_layout');
-
+                      
+                      
+                      
                      
                     //----------------ищем если есть роуты шаблонов вывода--------------
                      

@@ -1,0 +1,51 @@
+<h1><b><?=$data['post']->getTitle()?></b></h1>
+
+<img src="/slideshow/slideshow/slide1.jpg" alt="foto" ></img>
+<h2><?=$data['post']->getBody()?></h2>
+
+
+
+<h4 class="bg-info" id='read_news'></h4> 
+<br>
+
+
+
+
+<h2> Comments:</h2>
+
+<?php foreach($data['post']->getComments() as $comment): ?>
+
+<h4>Author: <a href='#plus'><?=$comment->getAuthor()?></a> Date: <?=$comment->getCreatedAt()?> <a href="#minus" id="minus_rating<?=$comment->getId()?>" data-comment-id="<?=$comment->getId()?>" >-</a> <a href="#plus" id="plus_rating<?=$comment->getId()?>" data-comment-id="<?=$comment->getId()?>">+</a> 
+
+<span>Понравилось:</span><a id="plus<?=$comment->getId()?>"><?=$comment->getLike()?></a> <span>Не понравилось:</span><a id="minus<?=$comment->getId()?>"><?=$comment->getNotLike()?></a> <br>
+
+
+
+</h4> 
+<h4><?=$comment->getBody()?></h4>
+
+
+
+<?php endforeach; ?>
+
+
+<hr>
+<h1>Please write your comment: </h1>
+
+ <form method="post" action="/comment/<?=$data['post']->getId()?>">
+  
+    <!--<div class="form-group">-->
+    <!--  <label for="disabledTextInput">Name:</label>-->
+    <!--  <input type="text" id="disabledTextInput"  name="author" class="form-control" placeholder="Name">-->
+    <!--</div>-->
+   
+    <br> 
+    
+     <div>  
+    <label for="textarea">Comment:</label>
+    <textarea id="textarea"  name="body" class="form-control" rows="3" placeholder="Comment" ></textarea>
+    </div> 
+    <br>
+    <button type="submit" class="btn-lg btn-block btn-primary">Send</button>
+  
+</form> 

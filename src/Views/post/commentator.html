@@ -1,0 +1,15 @@
+<h2> Comments Author:<?=current($data['comments'])->getAuthor()?></h2>
+
+<?php foreach($data['comments'] as $comment): ?>
+
+<h3>Post title: <?=$comment->getPost()->getTitle()?></h3>
+<h4>Author: <a href='#plus'><?=$comment->getAuthor()?></a> Date: <?=$comment->getCreatedAt()?> <a href="#minus" id="minus_rating<?=$comment->getId()?>" data-comment-id="<?=$comment->getId()?>" >-</a> <a href="#plus" id="plus_rating<?=$comment->getId()?>" data-comment-id="<?=$comment->getId()?>">+</a> 
+
+<span>Понравилось:</span><a id="plus<?=$comment->getId()?>"><?=$comment->getLike()?></a> <span>Не понравилось:</span><a id="minus<?=$comment->getId()?>"><?=$comment->getNotLike()?></a> <br>
+
+
+
+</h4> 
+<h4><?=$comment->getBody()?></h4>
+
+<?php endforeach; ?>

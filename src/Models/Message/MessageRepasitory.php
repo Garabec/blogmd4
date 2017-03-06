@@ -3,9 +3,20 @@
 
 namespace Models\Message;
 
-use Lib\Model;
 
-class MessageRepasitory extends Model{
+use Lib\DbPDO;
+
+class MessageRepasitory {
+ 
+ 
+    private $db;
+    
+    public function __construct(DbPDO $db){
+     
+    $this->db=$db;
+     
+    }
+ 
     
     public function save(Message $message ){
         

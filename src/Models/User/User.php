@@ -8,7 +8,7 @@ class User {
     
    protected $id;
    
-   protected $email;
+   protected $name;
    
    protected $password;
    
@@ -36,17 +36,17 @@ class User {
     /**
      * @return mixed
      */
-    public function getEmail()
+    public function getName()
     {
-        return $this->email;
+        return $this->name;
     }
 
     /**
      * @param mixed $email
      */
-    public function setEmail($email)
+    public function setName($name)
     {
-        $this->email = $email;
+        $this->name = $name;
         
         return $this; 
     }

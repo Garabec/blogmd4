@@ -1,0 +1,126 @@
+<div  class="row">
+    
+    <div class="col-md-6 bg-warning"><b>ТОП 5 Коментаторов</b>
+    
+    <?php foreach($data['top5'] as $commentator): ?>
+    
+    <a href="/commentator/<?=$commentator['id']?>"><?=$commentator['name']?></a> 
+    
+    <?php endforeach; ?>
+    
+    </div>
+    
+    
+    <div class="col-md-6"><b>ТОП 3 Темы</b>
+        
+       <?php foreach($data['top3'] as $post): ?>
+    
+    <a href="/post/<?=$post->getId()?>"><?=$post->getTitle()?></a> 
+    
+    <?php endforeach; ?> 
+        
+        
+    </div>
+</div>    
+
+
+<div  class="row">
+    
+    <div class="col-md-2">
+        
+        <div  class="row">
+        
+     <div class="col-md-12 reclam">Продажа телевизора <br>
+     
+     <span id="cena1">Цена</span><br>
+     <span id="name1">10000 &#8372;</span>
+     
+     
+     
+     
+     </div>
+     </div>
+     
+     <br><br>
+     <div  class="row">
+     <div class="col-md-12 reclam">Продажа телевизора <br>
+     
+     <span id="cena2">Цена</span><br>
+     <span id="name2">10000 &#8372;</span>
+     
+     
+     
+     
+     </div> 
+     </div>
+         </div>
+    
+    
+  <div class="col-md-8">
+   
+   <div  class="row">
+   
+  <?php foreach($data['category'] as $category): ?>
+  
+
+    <div class="col-md-3" > 
+    <div class="bg-info"> 
+    <h1><a href="/category/<?=$category->getName()?>"><?=$category->getName()?></a></h1>
+           <?php foreach($category->getPosts() as $post): ?>
+           <a href="/post/<?=$post->getId()?>" class="text-warning" ><?=$post->getTitle()?></a> <br>
+              <?php endforeach; ?>
+              </div>
+              </div>          
+           <?php endforeach; ?>
+           
+      </div>
+     
+     <br>      
+    <div  class="row">
+    <div class="col-md-4 col-md-offset-2">      
+    <slideshow>
+        
+       
+    <?php include "/home/ubuntu/workspace/webroot/slideshow/slideshow/slideshow.html" ?>    
+        
+        
+        
+    </slideshow>  
+    
+    </div> 
+    </div> 
+     
+     
+     
+     
+   </div>      
+           <div class="col-md-2"> 
+           <div  class="row">
+           <div class="col-md-12 reclam">Продажа телевизора <br>
+     
+     <span id="cena3">Цена</span><br>
+     <span id="name3">10000 &#8372;</span>
+     
+     
+     
+     
+     </div><br>
+           </div><br><br>
+           <div  class="row">
+           <div class="col-md-12 reclam">Продажа телевизора <br>
+     
+     <span id="cena4">Цена</span><br>
+     <span id="name4">10000 &#8372;</span>
+     
+     
+     
+     
+     </div> 
+           </div>
+           </div>
+           
+    </div>       
+     
+               
+            
+       

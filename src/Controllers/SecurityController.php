@@ -9,6 +9,8 @@ use Models\User\UserFormEdit;
 use Lib\RegisterForm;
 use Lib\App;
 use Lib\Session;
+use Lib\Request;
+use Lib\Pagination;
 
 use Models\User\UserRepasitory;
 
@@ -23,7 +25,10 @@ class SecurityController extends Controller {
     
     
     
-    
+
+
+
+
 public function loginAction() {
         
         $form=new LoginForm;
@@ -45,7 +50,7 @@ public function loginAction() {
          if($result) {
              
               Session::setFlash("Sign in"); 
-              Session::set('user',$user->getEmail());
+              Session::set('user',$user->getName());
               
               
               
@@ -156,14 +161,14 @@ public function logoutAction(){
 }
  
  
- public function admin_usersAction(){
+ public function admin_usersAction(Request $request){
      
      
      
     //$this->data=$this->model['user']->getListUsers() ;
      
      
-   if($this->params){  $params_sort=$this->params;
+   if(count($request->get('params'))){  $params_sort=$request->get('params');
         
         $this->data=$this->container->get('repasitory_man')->get('User')->getListUsers($params_sort[0],$params_sort[1]);}
       
@@ -177,10 +182,10 @@ public function logoutAction(){
     
  
  
- public function admin_edit_form_userAction(){
+ public function admin_edit_form_userAction(Request $request){
      
      
-    $id=$this->params; 
+    $id=$request->get('params'); 
     
     
      
@@ -249,10 +254,10 @@ public function logoutAction(){
  
  
  
-public function admin_delete_userAction(){
+public function admin_delete_userAction(Request $request){
        
        
-       $id=$this->params;
+       $id=$request->get('params');
        
       $this->data=$this->container->get('repasitory_man')->get('User')->deleteUser($id[0]);
       
@@ -261,9 +266,79 @@ public function admin_delete_userAction(){
        
    }  
  
+ public function admin_postAction(Request $request){
  
+ $params=$request->get('params'); 
+        
+        $page=$request->get('page');
+        
+  if(!count($params)){$params[0]='News';};     
+        
+        
+        $category_name=$params[0];
+        
  
+        $posts = $this->container->get('repasitory_man')->get('Post')->getListCategoryPost($category_name ,$page)->getPosts();
+        
+        if($page) { $currentPage=$page;} else {$currentPage=1;};
+      
+          $perPage=5;//todo config
+      
+                 $countItems= (int)$this->container->get('repasitory_man')->get('Post')->countPost($category_name);
+      
+      
+      
+                        $buttons= (new Pagination($countItems,$perPage,$currentPage))->buttons;
+       
+        
+
+        return $this->render( array(
+            'posts' => $posts,
+            'buttons' => $buttons
+        ));
+ 
+ }
+    
+ 
+  public function admin_commentAction(Request $request){
+      
+      
+        
+        $page=$request->get('page');
+        
+    
+        
+        
+        
+        
+ 
+        $comments = $this->container->get('repasitory_man')->get('Comment')->getListComments($page);
+        
+        if($page) { $currentPage=$page;} else {$currentPage=1;};
+      
+          $perPage=5;//todo config
+      
+                 $countItems= (int)$this->container->get('repasitory_man')->get('Comment')->countComments();
+      
+      
+      
+                        $buttons= (new Pagination($countItems,$perPage,$currentPage))->buttons;
+       
+        
+    
+
+        return $this->render( array(
+            'comments' => $comments,
+            'buttons' => $buttons
+        ));
+ 
+      
+      
+ 
+
  
     
-    
+}
+
+
 }

@@ -69,8 +69,22 @@ class Request{
    }
     
     
+   public function getUri() {
     
     
+    return $this->server['REQUEST_URI'];
     
+   }
+    
+   
+   public function mergeGET($params=array()) {
+    
+    $this->get+=$params;
+    
+      $_GET += $params;
+
+    
+    
+   }
     
 }

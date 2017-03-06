@@ -11,13 +11,27 @@
     <link rel="icon" href="../../favicon.ico">
     
     
-    <link rel="stylesheet" href="/css/style.css">
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/slideshow.css">
+    <link rel="stylesheet" href="/css/modalform.css">
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
     
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/css/menu.css">
+   <link rel="stylesheet" href="/css/style.css">
+   <link rel="stylesheet" href="/css/search.css">
+   
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+    <script src="/js/menu.js" ></script>
+    <script type="text/javascript" src="/js/slideshow.js"></script>
+     <script type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript" src="/js/textchange.js"></script>
+    <script type="text/javascript" src="/js/comments.js"></script>
+    <script type="text/javascript" src="/js/news.js"></script>
+    <script type="text/javascript" src="/js/reclama.js"></script>
+  
     <title>Starter Template for Bootstrap</title>
 
     
@@ -36,9 +50,10 @@
           </button>
           <a class="navbar-brand" href="#"><?=Lib\Config::get('My name site')?></a>
         </div>
+        
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li <?php if(Lib\App::getRouters()->getController()=='book'): ?> class="active" <?php endif ?> ><a href="/book/list">Books</a></li>
+            <li <?php if( $view_dir =='post'): ?> class="active" <?php endif ?> ><a href="/">Home</a></li>
             
             
             <?php  if(Lib\Session::has('user'))   {      ?>
@@ -50,14 +65,94 @@
             
             <?php }  else {  ?>
             
-            <li <?php if(Lib\App::getRouters()->getController()=='security'): ?> class="active" <?php endif ?> ><a href="/security/login">Login</a></li>
+            <li <?php if($view_dir=='security'): ?> class="active" <?php endif ?> ><a href="/security/login">Login</a></li>
             
             <?php } ?>
             
             
-            <li <?php  if(Lib\App::getRouters()->getController()=='contact'): ?> class="active" <?php endif ?> ><a href="/contact/send">Contact</a></li>
+            <li <?php  if($view_dir=='contact'): ?> class="active" <?php endif ?> ><a href="/contact/send">Contact</a></li>
+            
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog list<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/category/News">News</a></li>
+                            <li><a href="/category/Sport">Sport</a></li>
+                            <li><a href="/category/World">World</a></li>
+                            <li><a href="/category/Politic">Politic</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Posts</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Post</a></li>
+									<li><a href="#">Post</a></li>
+									<li><a href="#">Post</a></li>
+									<li><a href="#">Post</a></li>
+								</ul>
+							</li>
+                            <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Posts</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Post</a></li>
+									<li><a href="#">Post</a></li>
+									<li><a href="#">Post</a></li>
+									<li class="divider"></li>
+									<li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown Submenu Link 5.4</a>
+										<ul class="dropdown-menu">
+											<li><a href="#">Post</a></li>
+											<li><a href="#">Post</a></li>
+											<li class="divider"></li>
+											<li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown Submenu Link 5.4.3</a>
+												<ul class="dropdown-menu">
+													<li><a href="#">Post</a></li>
+													<li><a href="#">Post</a></li>
+													<li><a href="#">Post</a></li>
+													<li><a href="#">Post</a></li>
+												</ul>
+											</li>
+											<li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown Submenu Link 5.4.4</a>
+												<ul class="dropdown-menu">
+													<li><a href="#">Post</a></li>
+													<li><a href="#">Post</a></li>
+													<li><a href="#">Post</a></li>
+													<li><a href="#">Post</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+                        </ul>
+                    </li>
+            
+            
+            <li> <div id="block-search">
+<form method="get">
+ 
+<input type="text" name="q" id="input-search">
+<input type="submit" id="form-search" value=" ">
+ 
+</form>
+<div id="block-search-result">
+ 
+<ul id="list-search-result">
+ 
+
+ 
+</ul>
+ 
+</div>
+</div>  </li>
+            
+            
+            
           </ul>
+          
+          
+          
+          
         </div><!--/.nav-collapse -->
+       
+       
+       
+      
+        
       </div>
     </nav>
 
@@ -89,26 +184,75 @@
     </div>
 
 
+
+<div id="modal_form"><!-- Сaмo oкнo --> 
+      <span id="modal_close">X</span> <!-- Кнoпкa зaкрыть --> 
+      <!-- Тут любoе сoдержимoе -->
+ 
+ <div class="modal_form_width">
+  
+  
+   <h4> Срочно подпишись на новости!!!</h4> 
+
+      
+ <form method="post" action="" class="form-inline">
+  
+    <div class="form-group">
+      <label for="disabledTextInput">Name</label>
+      <input type="text" id="disabledTextInput"  name="name" class="form-control" placeholder="login">
+    </div>
+    <br><br>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" class="form-control"placeholder="email" >
+        
+    </div> 
+    <br> <br>
+    
+    
+    <br><br>
+    <button type="submit" >Send</button>
+  
+</form> 
+
+      
+</div>  
+      
+      
+</div>
+<div id="overlay"></div><!-- Пoдлoжкa -->
+
+<a href="#" id="go">Go</a>
+
+
+
    
   </body>
   
-  <script>
-        
-
-        $("a[id|='add']").on('click', function() {
-    
-            id = $(this).attr('id').split('-');
-            
-            id = id[1];
-            
-            $.get("/book/addCart/" + id, alert('Product ' + id + ' added'));
-            
-        });
-        
-
-        
-        </script> 
   
+        
+
+   <script>
+   
+
+$(document).ready(function () {
+    $(window).on('beforeunload', function() {
+      document.write('<div>.....................</div>');  // HTML код в одну строчку!!!
+      return "Вы точно решили покинуть наш сайт?";
+      });
+ 
+      $('a').click(function() {
+      $(window).off('beforeunload');
+    });
+  });
+
+
+</script>     
+         
+  <script type="text/javascript" src="/js/slideshow.js"></script>
+  <script type="text/javascript" src="/js/modalform.js"></script>
+  <script type="text/javascript" src="/js/search.js"></script>
+  <script type="text/javascript" src="/js/textchange.js"></script>
 </html>
 
 

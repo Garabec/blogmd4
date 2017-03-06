@@ -2,9 +2,11 @@
 
 $sc= new Lib\ContainerBuilder();
 
-$sc->set('repasitory_man',new Lib\RepasitoryManager());
-$sc->set('service_excel', new Lib\ExportServiceExel( $objPHPExcel= new \PHPExcel ));
-$sc->set('service_pdf',new Lib\ExportServicePDF( $pdf=new Lib\PDF()));
-$sc->set('dispatcher', new \Symfony\Component\EventDispatcher\EventDispatcher());
+$sc->set('request',new Lib\Request);
+$sc->set('DbConnection',new Lib\DbPDO(Lib\Config::get('connectionDB')));
+
+$sc->set('repasitory_man',new Lib\RepasitoryManager($sc->get('DbConnection')));
+
+
 
 return $sc;

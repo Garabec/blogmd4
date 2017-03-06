@@ -1,0 +1,58 @@
+<h1>Post</h1>
+
+
+<form method="post" action="/admin/post/form_edit_post">
+  
+    <div class="form-group">
+        <label for="id_temp">Id</label>
+      <input type="text" id="id_temp"  name="id_temp" class="form-control" value="<?=$data['post']->getId()?>" disabled  >
+    </div>
+    
+    
+    <input type="hidden" id="id"  name="id" class="form-control" value="<?=$data['post']->getId()?>"   >
+    
+    <input type="hidden" uri_back="uri_back"  name="uri_back" class="form-control" value="<?=Lib\Session::get('uri_back')?>"   >
+    
+    
+    
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" class="form-control"    value="<?=$data['post']->getTitle()?>" >
+        
+    </div> 
+    
+   <div class="form-group">
+      <label for="description">Body</label>
+      <input type="text" id="body" name="body" class="form-control" value="<?=$data['post']->getBody()?>" >
+        
+    </div> 
+    
+    
+    
+    <div class="form-group">
+      <label for="is_active">CreateAt</label>
+      <input type="text" id="create_at" name="created_at" class="form-control" value="<?=$data['post']->getCreatedAt()?>" >
+      
+     </div> 
+    
+    
+    
+    
+    <div class="form-group">
+   <label for="style">Category</label>   
+    <select  id="category" name="category" >
+        
+    <option selected > <?=$data['post']->getCategory()?> </option> 
+    
+    
+    
+    <?php foreach ($data['catigories'] as $category) : ?>  
+    <option><?=$category->getName()?></option>
+	  <?php endforeach; ?>
+    </select>
+    
+    </div> 
+    
+    <button type="submit" class="btn-lg btn-block btn-primary">Edit</button>
+  
+</form> 

@@ -33,7 +33,7 @@ class RegisterForm{
         
         
         
-        return  $this->data['email']!="" && $this->data['password']!="" && 
+        return  $this->data['name']!="" && $this->data['password']!="" && 
                 $this->data['confirm_password']&& $this->data['captcha'];
         
     }

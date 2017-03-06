@@ -37,17 +37,17 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li <?php if(Lib\App::getRouters()->getController()=='book'): ?> class="active" <?php endif ?> ><a href="/admin/book/list">Books</a></li>
+            <li <?php if($active=='admin_post'): ?> class="active" <?php endif ?> ><a href="/admin/post">Post</a></li>
             
             
             
-            <li <?php if(Lib\App::getRouters()->getController()=='security'): ?> class="active" <?php endif ?>   ><a href="/admin/security/users">Users</a></li>
+            <li <?php if($active=='admin_users'): ?> class="active" <?php endif ?>   ><a href="/admin/security/users">Users</a></li>
             
             
             
             
             
-            <li <?php  if(Lib\App::getRouters()->getController()=='contact'): ?> class="active" <?php endif ?> ><a href="/admin/contact/message">Messages</a></li>
+            <li <?php  if($active=='admin_comment'): ?> class="active" <?php endif ?> ><a href="/admin/comment">Comment</a></li>
             
             
             <?php  if(Lib\Session::has('user'))   {      ?>
@@ -59,7 +59,7 @@
             
             <?php }  else {  ?>
             
-            <li <?php if(Lib\App::getRouters()->getController()=='security'): ?> class="active" <?php endif ?> ><a href="/security/login">Login</a></li>
+            <li <?php if($active=='login'): ?> class="active" <?php endif ?> ><a href="/security/login">Login</a></li>
             
             <?php } ?>
             

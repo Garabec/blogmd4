@@ -1,22 +1,32 @@
 <?php
 
 namespace Lib;
+
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+use Lib\Request;
 
 
 class App {
     
-    public static $routers;
-    public static $request;
+    public  $routers;
+    public  $request;
     
-    public static $dispatcher ;
+    public  $dispatcher ;
     
-    public static $db;
+    public  $db;
     
-    public static function getRouters(){
+    
+    
+    
+    
+    
+    
+    
+    
+    public  function getRouters(){
         
-    return self::$routers;    
+    return $this->routers;    
         
         
     }
@@ -24,67 +34,66 @@ class App {
     
     
     
-    public static function run($uri){
+    public  function run( Request $request){
         
         
-      //$dispatcher = new EventDispatcher(); 
-      
-      //$dispatcher->addListener('data.view', array(new TestEvent(), 'dataView')); 
-      
-       //self::$dispatcher=$dispatcher; 
+        $this->request=$request;
+        $this->routers=new Router( $this->request);
         
-  //============= router==============      
         
-     self::$routers=new Router($uri);
-     
-  //------------connectionDB-----------------------   
-     extract(Config::get('connectionDB'));
-     
-     self::$db=new DbPDO($host,$user,$password,$dbname);
-     
-  //---------------request--------------------------------------   
-     
-     self::$request=new Request;
-   
-   
+        $this->request=$this->routers->request;
+        
+  
    
   //==============create controller -> action================  
   
-     $controller= 'Controllers\\'.self::$routers->getController();
+     $controller= 'Controllers\\'.$this->routers->getController();
      
-        $action=self::$routers->getAction();
+        $action=$this->routers->getAction();
+     
+     
+   
+     
      
           $controller_object = new $controller();
+          
+          
+          $layout=$this->routers->getRoute_Layout();
+          
+         
+          
+          $controller_object->setRouter($this->routers); 
+      
+      
   //==========================================================
   
       if(method_exists($controller_object,$action)) {
           
           
-         $view_path=$controller_object->$action();
+         $view_path=$controller_object->$action($this->request);
          
             //  $view_object=new View($controller_object->getData(),$view_path);
          
             //       $content=$view_object->render();
          
-                                                   } 
-        
-      else {
+                                                   }  else {
           
        throw new \Exception(" Нет метода $action в объекте $controller") ;  
           
            }  
       
       
-      $layout=self::$routers->getRoute();
       
       
       
+      
+     
       
   //--------------проверка при входе в админ панель существует ли сессия админа    
       if($layout=='admin') {
           
           
-        if(Session::get('role')!='admin') { App::redirect("/security/login") ;   };
+        if(Session::get('role')!='admin') {$this->redirect("/security/login") ;   };
           
           
       }
@@ -102,7 +111,7 @@ class App {
     }
     
     
-   public static function redirect($to) {
+   public  function redirect($to) {
        
       header('Location:'.$to);
       

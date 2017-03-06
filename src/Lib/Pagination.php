@@ -41,21 +41,45 @@ class Pagination {
      for($i=1 ; $i<=$pagesCount; $i++){
          
          
+      
+     if($i<=$currentPage+3) {
          
-       $this->buttons[]=new Button($i,$i!=$currentPage) ; 
+    $this->buttons[]=new Button($i,$i!=$currentPage) ; 
+    
+     
+     
+         }
+     
+     if($i==$currentPage+4){
+     $this->buttons[]=new Button($i,$i!=$currentPage,'.....') ;
+     }
+     
+
+     
+     if($i>=$pagesCount-3 && !($i<=$currentPage+3)) {
          
+    $this->buttons[]=new Button($i,$i!=$currentPage) ; 
+    
+     };
+    
+  
      };
     
       $this->buttons[]=new Button($currentPage+1,$currentPage<$pagesCount,"Next"); 
        
      
-     
+      
      
        
    }
     
     
-    
+   public function getButton(){
+       
+       
+     return $this->buttons;  
+       
+   } 
     
     
     
